@@ -1,0 +1,156 @@
+[
+  {
+    "title": "December 19th",
+    "description": "Don't Look Up",
+    "groups": [
+      {
+        "title": "Mythical Creatures in Constellations",
+        "items": ["Unicorn", "Hydra", "Pegasus", "Phoenix"]
+      },
+      {
+        "title": "Local Names for Mountain Lions",
+        "items": ["Cougar", "Puma", "Panther", "Catamount"]
+      },
+      {
+        "title": "Western Zodiac Animals",
+        "items": ["Bull", "Lion", "Crab", "Scorpion"]
+      },
+      {
+        "title": "Chinese Zodiac Animals",
+        "items": ["Ox", "Tiger", "Horse", "Pig"]
+      }
+    ]
+  },
+  {
+    "title": "December 20th",
+    "description": "Machinations",
+    "groups": [
+      {
+        "title": "Washing machine cycles",
+        "items": ["Spin", "Rinse", "Soak", "Wash"]
+      },
+      {
+        "title": "Tired",
+        "items": ["Beat", "Weary", "Bushed", "Spent"]
+      },
+      {
+        "title": "Collection of songs",
+        "items": ["Mix", "Set", "Playlist", "Repertoire"]
+      },
+      {
+        "title": "One-Two Buckle My...",
+        "items": ["Shoe", "Door", "Sticks", "Straight"]
+      }
+    ]
+  },
+  {
+    "title": "December 21st",
+    "description": "NYT Would Never",
+    "groups": [
+      {
+        "title": "To eat quickly",
+        "items": ["Wolf", "Gobble", "Scarf", "Bolt"]
+      },
+      {
+        "title": "Blood-takers",
+        "items": ["Mosquito", "Vampire", "Tick", "Phlebotomist"]
+      },
+      {
+        "title": "___-ass",
+        "items": ["Kick", "Bad", "Dumb", "Swamp"]
+      },
+      {
+        "title": "McDonaldland Residents",
+        "items": ["Clown", "Monster", "Bird", "Thief"]
+      }
+    ]
+  },
+  {
+    "title": "December 22nd",
+    "description": "Almost Christmas",
+    "groups": [
+      {
+        "title": "Pine tree products",
+        "items": ["Pitch", "Needle", "Cone", "Nuts"]
+      },
+      {
+        "title": "Candy ___",
+        "items": ["Cane", "Necklace", "Corn", "Apple"]
+      },
+      {
+        "title": "Things with Trunks",
+        "items": ["Elephant", "Tree", "Car", "Attic"]
+      },
+      {
+        "title": "Wearable Plant Crafts",
+        "items": ["Garland", "Lei", "Coronet", "Chaplet"]
+      }
+    ]
+  },
+  {
+    "title": "December 23rd",
+    "description": "Here we Come A-wassailing!",
+    "groups": [
+      {
+        "title": "Up on the Rooftop",
+        "items": ["Paws", "Klaus", "Toys", "Joys"]
+      },
+      {
+        "title": "Jingle Bells",
+        "items": ["Snow", "Sleigh", "Go", "Way"]
+      },
+      {
+        "title": "O Holy Night",
+        "items": ["Night", "Shining", "Birth", "Pining"]
+      },
+      {
+        "title": "All I Want For Christmas is You",
+        "items": ["Christmas", "Need", "Presents", "Tree"]
+      }
+    ]
+  },
+  {
+    "title": "December 24th",
+    "description": "Christmas Classics",
+    "groups": [
+      {
+        "title": "Miracle on 34th Street (1947)",
+        "items": ["Macy's", "Dead Letters", "Trial", "Dream House"]
+      },
+      {
+        "title": "It's a Wonderful Life (1946)",
+        "items": ["Money", "Angel", "Potter", "Bell"]
+      },
+      {
+        "title": "Rudolph The Red-Nosed Reindeer (1964)",
+        "items": ["Dentist", "Prospector", "Yeti", "Misfits"]
+      },
+      {
+        "title": "Elf (2003)",
+        "items": ["Orphan", "Snowball Fight", "Publisher", "Sugar"]
+      }
+    ]
+  },
+  {
+    "title": "December 25th",
+    "description": "Merry Christmas, everyone!",
+    "groups": [
+      {
+        "title": "Holiday vocal performance",
+        "items": ["Carol", "Wassail", "Sing", "Belt"]
+      },
+      {
+        "title": "Reindeer Actions",
+        "items": ["Dash", "Dance", "Prance", "Blitz"]
+      },
+      {
+        "title": "Frosty's Head Decor",
+        "items": ["Pipe", "Button", "Coal", "Hat"]
+      },
+      {
+        "title": "Santa's Second Name",
+        "items": ["Claus", "Nicholas", "Kringle", "Noel"]
+      }
+    ]
+  }
+]

@@ -1,0 +1,74 @@
+<div class="title">Connections Maker</div>
+<hr>
+
+@if (round)
+{
+  <div class="round-container">
+    <div class="round-info-container">
+      <div class="round-title">{{round.title}}:</div>
+      <div class="round-description">{{round.description}}</div>
+    </div>
+
+    <div class="word-grid">
+      @for (group of round.groupsFound; track $index) {
+        <div class="group-box" [ngClass]="{
+          'group-box-yellow': group.value == GroupValueEnum.Yellow,
+          'group-box-green': group.value == GroupValueEnum.Green,
+          'group-box-blue': group.value == GroupValueEnum.Blue,
+          'group-box-purple': group.value == GroupValueEnum.Purple,
+          }">
+          <div class="group-title">{{group.title}}</div>
+          <div class="group-items">{{group.itemsString}}</div>
+        </div>
+      }
+      @for (word of round.words; track $index) {
+        <div 
+          class="word-box" 
+          [ngClass]="{
+            'word-box-selected' : word.selected,
+            'word-box-hidden': !word.visible,
+            'word-box-game-over': round.complete
+            }"
+          (click)="onClick(word)">
+          <div>{{word.title}}</div>
+        </div>
+      }
+    </div>
+    
+    @if (!round.complete)
+    {
+      <div class="guesses-box">
+        <div>Mistakes Remaining:</div>
+        @for (guess of [].constructor(round.wrongGuessesRemaining); track $index) 
+        {
+          <div class="guess-marker"></div>
+        }
+      </div>
+
+      <div class="button-box">
+        <button matButton="outlined" (click)="shuffle()">Shuffle</button>
+        <button matButton="outlined" (click)="deselectAll()">Deselect All</button>
+        <button matButton="outlined" (click)="submit()">Submit</button>
+      </div>
+    }
+    @else 
+    {
+      @if (round.win)
+      {
+        <div class="game-over-message">Congratulations! You've completed the round.</div>
+      }
+      @else
+      {
+        <div class="game-over-message">Sorry, you're out of guesses. Round over.</div>
+      }
+      <div class="button-box">
+        <button matButton="outlined">Return to Menu</button>
+      </div>
+    }
+  </div>
+}
+
+<canvas #qrCodeCanvas class="qrCodeCanvas"></canvas>
+
+
+<router-outlet />
