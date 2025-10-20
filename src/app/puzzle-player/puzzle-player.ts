@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { Word, GroupValue, Puzzle, PuzzleStatus, GROUPSIZE } from '../../shared/puzzle';
+import { Word, GroupValue, Puzzle, PuzzleStatus, GROUPSIZE, NUMGROUPS } from '../../shared/puzzle';
 import { GameService } from '../../shared/game-service';
 
 
@@ -24,6 +24,7 @@ export class PuzzlePlayer implements OnInit {
   private isPlaytest: boolean = false;
   private subscription?: Subscription;
   public wrongAnim: boolean = false;
+  public oneAwayAnim: boolean = false;
   
   constructor(private gameService: GameService,
               private route: ActivatedRoute,
@@ -75,10 +76,26 @@ export class PuzzlePlayer implements OnInit {
       const guess = this.puzzle!.makeGuess(this.puzzle!.selected);
       if (guess && !guess.isCorrect)
       {
+        let groupCounts = new Array<number>(NUMGROUPS);
+        for (let i=0; i < NUMGROUPS; ++i)
+        {
+          groupCounts[i] = 0;
+        }
+        for (const word of guess.words)
+        {
+          groupCounts[word.groupId] += 1;
+        }
+
         this.wrongAnim = true;
+        this.oneAwayAnim = (Math.max(...groupCounts) == (GROUPSIZE-1));
+
         setTimeout(()=>{
           this.wrongAnim = false;
         }, 500);
+
+        setTimeout(()=>{
+          this.oneAwayAnim = false;
+        }, 2000);
       }
 
       if (!this.isPlaytest)

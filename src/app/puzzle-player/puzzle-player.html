@@ -5,6 +5,11 @@
     <div class="puzzle-subtitle">{{puzzle.subtitle}}</div>
   </div>
 
+  @if (oneAwayAnim)
+  {
+    <div class="hint-message">One away...</div>
+  }
+
   <div class="word-grid">
     @for (group of puzzle.groupsFound; track $index) {
       <div class="group-box" [ngClass]="{
@@ -22,13 +27,27 @@
         class="word-box" 
         [ngClass]="{
           'word-box-selected' : word.selected,
-          'word-box-hidden': !word.visible,
-          'word-box-game-over': puzzle.status == PuzzleStatus.Complete,
+          'word-box-hidden': !word.visible || puzzle.status == PuzzleStatus.Complete,
           'word-box-wrong': word.selected && wrongAnim
           }"
         (click)="onClick(word)">
         <div>{{word.title}}</div>
       </div>
+    }
+    @if (puzzle.status == PuzzleStatus.Complete)
+    {
+      @for (group of puzzle.groupsNotFound; track $index)
+      {
+        <div class="group-box group-box-game-over" [ngClass]="{
+        'group-box-yellow': group.value == GroupValue.Yellow,
+        'group-box-green': group.value == GroupValue.Green,
+        'group-box-blue': group.value == GroupValue.Blue,
+        'group-box-purple': group.value == GroupValue.Purple,
+        }">
+        <div class="group-title">{{group.title}}</div>
+        <div class="group-items">{{group.itemsString}}</div>
+      </div>
+      }
     }
   </div>
   

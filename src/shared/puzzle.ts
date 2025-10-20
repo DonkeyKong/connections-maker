@@ -412,6 +412,11 @@ export class Puzzle
     return this.groupsFound.length == NUMGROUPS;
   }
 
+  public get groupsNotFound() : Group[]
+  {
+    return this.groups.filter((group)=> !this.groupsFound.includes(group));
+  }
+
   // Get an 16 character alphanumeric hash unique to this puzzle
   public get hash(): string
   {
