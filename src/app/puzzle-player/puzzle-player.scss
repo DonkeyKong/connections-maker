@@ -26,7 +26,7 @@
 
 .group-box {
   width: $screen-width;
-  height: 3.0rem;
+  min-height: 3.0rem;
   border-radius: 0.5rem;
   border-style: outset;
   border-color: black;
