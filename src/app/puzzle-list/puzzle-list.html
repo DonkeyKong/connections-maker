@@ -17,7 +17,21 @@
         
         @if (puzzle.status == PuzzleStatus.Complete)
         {
-          <div class="score">Score: {{puzzle.points}}</div>
+          @if (puzzle.starScore > 0)
+          {
+            <div class="star-rating" [style]="starRatingWidthStyle(puzzle)">
+              <mat-icon class="star-icon" fontIcon="star" />
+              <mat-icon class="star-icon" fontIcon="star" />
+              <mat-icon class="star-icon" fontIcon="star" />
+              <mat-icon class="star-icon" fontIcon="star" />
+              <mat-icon class="star-icon" fontIcon="star" />
+            </div>
+          }
+          @else 
+          {
+            <mat-icon class="star-icon" fontIcon="heart_broken" />
+          }
+
           <div class="button-container">
             <button matButton="outlined" (click)="playPuzzle(puzzle)">View Puzzle</button>
           </div>
@@ -43,9 +57,13 @@
   <mat-tab label="Make">
 
     <div class="button-box">
-      <button matButton="outlined" (click)="makePuzzle()">+ New Puzzle</button>
-      <button matButton="outlined" (click)="shareSelected()" [disabled]="getSelected().length == 0">Share Selected</button>
+      <!-- <button matButton="outlined" (click)="selectAll()">Select All</button> -->
       <button matButton="outlined" (click)="deselectAll()" [disabled]="getSelected().length == 0">Deselect All</button>
+      <button matButton="outlined" (click)="shareSelected()" [disabled]="getSelected().length == 0">Share Selected</button>
+      
+    </div>
+    <div class="button-box">
+      <button matButton="outlined" (click)="makePuzzle()">+ New Puzzle</button>
     </div>
 
     @for(puzzle of madePuzzles; track $index)

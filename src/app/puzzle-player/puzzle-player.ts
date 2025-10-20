@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -10,7 +11,7 @@ import { GameService } from '../../shared/game-service';
 
 @Component({
   selector: 'app-puzzle-player',
-  imports: [ CommonModule, MatButtonModule ],
+  imports: [ CommonModule, MatButtonModule, MatIconModule ],
   templateUrl: './puzzle-player.html',
   styleUrl: './puzzle-player.scss'
 })
@@ -87,4 +88,8 @@ export class PuzzlePlayer implements OnInit {
     }
   }
 
+  public get starRatingWidthStyle(): string
+  {
+    return `width: ${this.puzzle!.starScore * 2.0}rem`;
+  }
 }

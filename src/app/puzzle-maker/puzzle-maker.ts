@@ -62,8 +62,8 @@ export class PuzzleMaker implements OnInit {
   {
     this.puzzleId = -1;
     this.puzzle = {
-      title: "New Puzzle Title",
-      subtitle: "New puzzle subtitle. A puzzle hint or maybe the date.",
+      title: "New Puzzle",
+      subtitle: "A puzzle hint or maybe the date.",
       groups: Array.from({length: NUMGROUPS}, (e, i) => {
         return {
           title: idToDefaultName(i),

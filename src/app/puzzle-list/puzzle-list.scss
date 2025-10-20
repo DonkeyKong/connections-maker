@@ -50,6 +50,19 @@
   color: red;
 }
 
+.star-rating {
+  display: flex;
+  overflow-x: hidden;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+}
+
+.star-icon {
+  flex-shrink: 0;
+  width: 2rem;
+  height: 1.5rem;
+}
+
 .message-box {
   display: flex;
   border-style: solid;

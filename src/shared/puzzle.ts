@@ -5,9 +5,11 @@ export const GROUPSIZE: number = 4;
 export const NUMGROUPS: number = 4;
 export const WRONGGUESSES: number = 4;
 
+export const MAXBONUS: number = 2.0;
 export const MINBONUS: number = 0.5;
 export const BONUSDECREASE: number = 0.2;
 export const BONUSPENALTY: number = 0.5;
+export const MAXSTARS: number = 5;
 
 export enum GroupValue
 {
@@ -63,11 +65,11 @@ function groupValueBasePoints(groupValue: GroupValue) : number
     case GroupValue.Yellow:
       return 10;
     case GroupValue.Green:
-      return 20;
+      return 13;
     case GroupValue.Blue:
-      return 30;
+      return 16;
     case GroupValue.Purple:
-      return 40;
+      return 20;
     default:
       return 0;
   }
@@ -213,7 +215,7 @@ export class Puzzle
   public words: Word[] = [];
   public guesses: Guess[] = [];
   public points: number = 0;
-  public bonusMultiplier: number = 2.0;
+  public bonusMultiplier: number = MAXBONUS;
   private loaded: boolean = false;
 
   constructor(PuzzleStorage: PuzzleStorage)
@@ -425,6 +427,78 @@ export class Puzzle
     }
 
     return base64ToBase64Url(uni8array.subarray(0, 12).toBase64());
+  }
+
+  public get starScore(): number
+  {
+    const lowestScore = groupValueBasePoints(GroupValue.Purple) * MINBONUS + 
+                        groupValueBasePoints(GroupValue.Blue) * MINBONUS + 
+                        groupValueBasePoints(GroupValue.Green) * MINBONUS + 
+                        groupValueBasePoints(GroupValue.Yellow) * MINBONUS;
+
+    const highestScore = groupValueBasePoints(GroupValue.Purple) * (MAXBONUS - (BONUSDECREASE * 0)) + 
+                        groupValueBasePoints(GroupValue.Blue) * (MAXBONUS - (BONUSDECREASE * 1)) + 
+                        groupValueBasePoints(GroupValue.Green) * (MAXBONUS - (BONUSDECREASE * 2)) + 
+                        groupValueBasePoints(GroupValue.Yellow) * (MAXBONUS - (BONUSDECREASE * 3));
+    
+    if (this.points == 0)
+    {
+      return 0;
+    }
+    
+    const normalizedPoints = (Math.min(Math.max(this.points, lowestScore), highestScore) - lowestScore) / (highestScore - lowestScore);
+    for (let i=1; i < MAXSTARS; ++i)
+    {
+      if (normalizedPoints < (i / (MAXSTARS-1)))
+      {
+        return i;
+      }
+    }
+    return MAXSTARS;
+  }
+
+  public get starScoreText(): string
+  {
+    if (this.win)
+    {
+      switch (this.starScore)
+      {
+        case 1:
+          return "Alright"
+        case 2:
+          return "Good"
+        case 3:
+          return "Great"
+        case 4:
+          return "Amazing"
+        case 5:
+          return "Perfect!"
+        default:
+          return "";
+      }
+    }
+    else
+    {
+      switch (this.starScore)
+      {
+        case 0:
+          return "Oh No"
+        case 1:
+          return "OK"
+        case 2:
+          return "Alright"
+        case 3:
+          return "So Close"
+        case 4:
+          return "Wow"
+        case 5:
+          return "How?"
+        default:
+          return "";
+      }
+    }
+
+    
   }
 
 }

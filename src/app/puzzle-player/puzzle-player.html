@@ -43,7 +43,7 @@
     </div>
   }
 
-  <div class="puzzle-score-container">
+  <!-- <div class="puzzle-score-container">
     <div class="box">
       <div class="label">Score:</div>
       <div class="value">{{puzzle.points}}</div>
@@ -52,7 +52,28 @@
       <div class="label">Bonus:</div>
       <div class="value">{{puzzle.bonusMultiplier.toFixed(1)}}x</div>
     </div>
-  </div>
+  </div> -->
+
+  @if (puzzle.status == PuzzleStatus.Complete)
+  {
+    <div class="rating-container">
+      <div class="star-rating-text">{{puzzle.starScoreText}}</div>
+      @if (puzzle.starScore > 0)
+      {
+        <div class="star-rating" [style]="starRatingWidthStyle">
+          <mat-icon class="star-icon" fontIcon="star" />
+          <mat-icon class="star-icon" fontIcon="star" />
+          <mat-icon class="star-icon" fontIcon="star" />
+          <mat-icon class="star-icon" fontIcon="star" />
+          <mat-icon class="star-icon" fontIcon="star" />
+        </div>
+      }
+      @else 
+      {
+        <div class="star-rating"><mat-icon class="star-icon" fontIcon="heart_broken" /></div>
+      }
+    </div>
+  }
 
   @if (puzzle.status != PuzzleStatus.Complete)
   {

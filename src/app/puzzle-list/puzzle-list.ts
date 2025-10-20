@@ -9,7 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { ShareDialog } from '../share-dialog/share-dialog';
-import { Puzzle, PuzzleStatus, PuzzleStorage } from '../../shared/puzzle';
+import { Puzzle, PuzzleStatus, PuzzleStorage, MAXSTARS } from '../../shared/puzzle';
 import { GzipBase64Compressor } from '../../shared/gzip-base64-compressor';
 import { base64UrlToBase64 } from '../../shared/base64url';
 import { GameService } from '../../shared/game-service';
@@ -24,6 +24,7 @@ import { GameService } from '../../shared/game-service';
 export class PuzzleList implements OnInit {
 
   public readonly PuzzleStatus = PuzzleStatus;
+  public readonly MAXSTARS = MAXSTARS;
   public selected: Map<number, boolean>;
   private subscription?: Subscription;
   public addDataMessage?: string;
@@ -128,6 +129,15 @@ export class PuzzleList implements OnInit {
     this.selected.clear();
   }
 
+  public selectAll(): void
+  {
+    this.selected.clear();
+    for (let i=0; i < this.gameService.madePuzzles.length; ++i)
+    {
+      this.selected.set(i, true);
+    }
+  }
+
   public isSelected(index: number): boolean
   {
     return this.selected.get(index) ?? false;
@@ -153,6 +163,11 @@ export class PuzzleList implements OnInit {
     let dialogRef = this.dialog.open(ShareDialog, {
       data: { puzzles: this.getSelected() }
     });
+  }
+
+  public starRatingWidthStyle(puzzle: Puzzle)
+  {
+    return `width: ${puzzle.starScore * 2.0}rem`;
   }
 
 }

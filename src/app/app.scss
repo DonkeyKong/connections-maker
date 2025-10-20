@@ -8,15 +8,40 @@ $word-box-selected: rgb(211, 76, 76);
 
 $screen-width: 24rem;
 
-.game-logo {
+.game-header {
+  display: flex;
+  align-items: center;
+  height: 3.0rem;
+  margin-left: 1.0rem;
+  gap: 1.0rem;
+  margin-bottom: -0.5rem;
+}
+
+.game-title {
   font-size: 2.0rem;
-  align-content: center;
-  margin: 1.0rem;
-  // color: $word-box-selected;
-  // text-shadow:  0.1rem 0.2rem $connections-yellow,
-  //               0.2rem 0.4rem $connections-green,
-  //               0.3rem 0.6rem $connections-blue,
-  //               0.4rem 0.8rem $connections-purple;
+}
+
+.logo {
+  display: flex;
+  flex-wrap: wrap;
+  width: 2.0rem;
+  height: 2.0rem;
+}
+.box {
+    width: 2.0rem;
+    height: 0.5rem;
+}
+.yellow-box {
+  background-color: $connections-yellow;
+}
+.green-box {
+  background-color: $connections-green;
+}
+.blue-box {
+  background-color: $connections-blue;
+}
+.purple-box {
+  background-color: $connections-purple;
 }
 
 .component-container {
