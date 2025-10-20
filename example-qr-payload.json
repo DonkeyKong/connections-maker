@@ -1,7 +1,7 @@
 [
   {
-    "title": "December 19th",
-    "description": "Don't Look Up",
+    "subtitle": "December 19th",
+    "title": "Don't Look Up",
     "groups": [
       {
         "title": "Mythical Creatures in Constellations",
@@ -22,8 +22,8 @@
     ]
   },
   {
-    "title": "December 20th",
-    "description": "Machinations",
+    "subtitle": "December 20th",
+    "title": "Machinations",
     "groups": [
       {
         "title": "Washing machine cycles",
@@ -44,8 +44,8 @@
     ]
   },
   {
-    "title": "December 21st",
-    "description": "NYT Would Never",
+    "subtitle": "December 21st",
+    "title": "NYT Would Never",
     "groups": [
       {
         "title": "To eat quickly",
@@ -66,8 +66,8 @@
     ]
   },
   {
-    "title": "December 22nd",
-    "description": "Almost Christmas",
+    "subtitle": "December 22nd",
+    "title": "Almost Christmas",
     "groups": [
       {
         "title": "Pine tree products",
@@ -88,8 +88,8 @@
     ]
   },
   {
-    "title": "December 23rd",
-    "description": "Here we Come A-wassailing!",
+    "subtitle": "December 23rd",
+    "title": "Here we Come A-wassailing!",
     "groups": [
       {
         "title": "Up on the Rooftop",
@@ -110,8 +110,8 @@
     ]
   },
   {
-    "title": "December 24th",
-    "description": "Christmas Classics",
+    "subtitle": "December 24th",
+    "title": "Christmas Classics",
     "groups": [
       {
         "title": "Miracle on 34th Street (1947)",
@@ -132,8 +132,8 @@
     ]
   },
   {
-    "title": "December 25th",
-    "description": "Merry Christmas, everyone!",
+    "subtitle": "December 25th",
+    "title": "Merry Christmas, everyone!",
     "groups": [
       {
         "title": "Holiday vocal performance",

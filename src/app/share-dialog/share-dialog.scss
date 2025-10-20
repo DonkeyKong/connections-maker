@@ -1,0 +1,22 @@
+@use '../app.scss' as *;
+
+h2 {
+  justify-content: center;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.dialog-container {
+  padding: 1.0rem;
+}
+
+.qrCodeCanvas {
+  display: block;
+  max-width: 20rem;
+  max-height: 20rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+}

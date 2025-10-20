@@ -1,0 +1,140 @@
+<mat-form-field class="title-input">
+  <mat-label>Puzzle Title</mat-label>
+  <input matInput [(ngModel)]="puzzle.title" (ngModelChange)="validateForm()">
+</mat-form-field>
+
+<mat-form-field class="title-input">
+  <mat-label>Subtitle</mat-label>
+  <input matInput [(ngModel)]="puzzle.subtitle" (ngModelChange)="validateForm()">
+</mat-form-field>
+
+<div class="word-grid">
+
+  <div class="group-box group-box-yellow">
+    <mat-form-field class="title-input">
+      <mat-label>Group Description</mat-label>
+      <input matInput [(ngModel)]="puzzle.groups[0].title" (ngModelChange)="validateForm()">
+    </mat-form-field>
+
+    <div class="group-words-flex">
+      <div class="word-box">
+        <input matInput [(ngModel)]="puzzle.groups[0].items[0]" class="word-input" (ngModelChange)="validateForm()">
+      </div>
+      <div class="word-box">
+        <input matInput [(ngModel)]="puzzle.groups[0].items[1]" class="word-input" (ngModelChange)="validateForm()">
+      </div>
+      <div class="word-box">
+        <input matInput [(ngModel)]="puzzle.groups[0].items[2]" class="word-input" (ngModelChange)="validateForm()">
+      </div>
+      <div class="word-box">
+        <input matInput [(ngModel)]="puzzle.groups[0].items[3]" class="word-input" (ngModelChange)="validateForm()">
+      </div>
+    </div>
+
+  </div>
+
+  <div class="group-box group-box-green">
+    <mat-form-field class="title-input">
+      <mat-label>Group Description</mat-label>
+      <input matInput [(ngModel)]="puzzle.groups[1].title"  (ngModelChange)="validateForm()">
+    </mat-form-field>
+
+    <div class="group-words-flex">
+      <div class="word-box">
+        <input matInput [(ngModel)]="puzzle.groups[1].items[0]" class="word-input" (ngModelChange)="validateForm()">
+      </div>
+      <div class="word-box">
+        <input matInput [(ngModel)]="puzzle.groups[1].items[1]" class="word-input" (ngModelChange)="validateForm()">
+      </div>
+      <div class="word-box">
+        <input matInput [(ngModel)]="puzzle.groups[1].items[2]" class="word-input" (ngModelChange)="validateForm()">
+      </div>
+      <div class="word-box">
+        <input matInput [(ngModel)]="puzzle.groups[1].items[3]" class="word-input" (ngModelChange)="validateForm()">
+      </div>
+    </div>
+
+  </div>
+
+  <div class="group-box group-box-blue">
+    <mat-form-field class="title-input">
+      <mat-label>Group Description</mat-label>
+      <input matInput [(ngModel)]="puzzle.groups[2].title" (ngModelChange)="validateForm()">
+    </mat-form-field>
+
+    <div class="group-words-flex">
+      <div class="word-box">
+        <input matInput [(ngModel)]="puzzle.groups[2].items[0]" class="word-input" (ngModelChange)="validateForm()">
+      </div>
+      <div class="word-box">
+        <input matInput [(ngModel)]="puzzle.groups[2].items[1]" class="word-input" (ngModelChange)="validateForm()">
+      </div>
+      <div class="word-box">
+        <input matInput [(ngModel)]="puzzle.groups[2].items[2]" class="word-input" (ngModelChange)="validateForm()">
+      </div>
+      <div class="word-box">
+        <input matInput [(ngModel)]="puzzle.groups[2].items[3]" class="word-input" (ngModelChange)="validateForm()">
+      </div>
+    </div>
+
+  </div>
+
+  <div class="group-box group-box-purple">
+    <mat-form-field class="title-input">
+      <mat-label>Group Description</mat-label>
+      <input matInput [(ngModel)]="puzzle.groups[3].title" (ngModelChange)="validateForm()">
+    </mat-form-field>
+
+    <div class="group-words-flex">
+      <div class="word-box">
+        <input matInput [(ngModel)]="puzzle.groups[3].items[0]" class="word-input" (ngModelChange)="validateForm()">
+      </div>
+      <div class="word-box">
+        <input matInput [(ngModel)]="puzzle.groups[3].items[1]" class="word-input" (ngModelChange)="validateForm()">
+      </div>
+      <div class="word-box">
+        <input matInput [(ngModel)]="puzzle.groups[3].items[2]" class="word-input" (ngModelChange)="validateForm()">
+      </div>
+      <div class="word-box">
+        <input matInput [(ngModel)]="puzzle.groups[3].items[3]" class="word-input" (ngModelChange)="validateForm()">
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="puzzle-validity-status">
+  @if (validityStatus == PuzzleValidityResult.Valid)
+  {
+    <mat-icon class="good" fontIcon="check_circle" /><div class="message good">Puzzle is valid.</div>
+  }
+  @else if (validityStatus == PuzzleValidityResult.DuplicateWord)
+  {
+    <mat-icon class="bad" fontIcon="warning" /><div class="message bad">Puzzle cannot have any duplicate words.</div>
+  }
+  @else if (validityStatus == PuzzleValidityResult.EmptyGroupTitle)
+  {
+    <mat-icon class="bad" fontIcon="warning" /><div class="message bad">All groups must have titles.</div>
+  }
+  @else if (validityStatus == PuzzleValidityResult.EmptyPuzzleTitle)
+  {
+    <mat-icon class="bad" fontIcon="warning" /><div class="message bad">Puzzle must have a title.</div>
+  }
+  @else if (validityStatus == PuzzleValidityResult.EmptyWord)
+  {
+    <mat-icon class="bad" fontIcon="warning" /><div class="message bad">No words may be left blank.</div>
+  }
+  @else if (validityStatus == PuzzleValidityResult.WrongGroupCount)
+  {
+    <mat-icon class="bad" fontIcon="warning" /><div class="message bad">Puzzle must have {{NUMGROUPS}} groups.</div>
+  }
+  @else if (validityStatus == PuzzleValidityResult.WrongGroupSize)
+  {
+    <mat-icon class="bad" fontIcon="warning" /><div class="message bad">Each group must have {{GROUPSIZE}} words.</div>
+  }
+</div>
+
+<div class="button-box">
+  <button matButton="outlined" (click)="cancel()">Cancel</button>
+  <button matButton="outlined" (click)="saveAndExit()">Save and Exit</button>
+</div>

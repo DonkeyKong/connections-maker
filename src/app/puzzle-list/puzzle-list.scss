@@ -1,0 +1,70 @@
+@use '../app.scss' as *;
+
+.puzzle-list-box {
+  border-style: solid;
+  border-color: $word-box-border;
+  border-width: 0.25rem;
+  margin-top: 1rem;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  -webkit-user-select: none; /* Safari */
+  user-select: none; /* Non-prefixed version, 
+                        currently supported by all other modern browsers */
+
+  .title {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.0rem;
+    margin-bottom: 0.5rem;
+    color: var(--mat-sys-primary);
+    font-weight: 100;
+  }
+
+  .score {
+    font-size: 1.0rem;
+  }
+
+  .status-indicator {
+    float: right;
+    display: block;
+  }
+
+  .select-indicator {
+    float: left;
+    display: block;
+    width: 2.0rem;
+    height: 100%;
+  }
+}
+
+.no-list-items {
+  font-size: 1.2rem;
+  margin-top: 1.0rem;
+  font-style: italic;
+}
+
+.bad {
+  color: red;
+}
+
+.message-box {
+  display: flex;
+  border-style: solid;
+  border-radius: 0.5rem;
+  border-color: $word-box-border;
+  margin-top: 1rem;
+  align-items: center;
+  gap: 1.0rem;
+  padding: 0.5rem;
+
+  .good {
+    color: lightgreen;
+  }
+
+  .bad {
+    color: goldenrod;
+  }
+}

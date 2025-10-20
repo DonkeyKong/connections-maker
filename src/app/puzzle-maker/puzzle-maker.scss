@@ -1,0 +1,110 @@
+@use '../app.scss' as *;
+
+.title-input {
+  width: 100%;
+}
+
+.puzzle-info-container {
+  margin-bottom: 1.0rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+
+.puzzle-title {
+  font-size: 1.5rem;
+}
+
+.puzzle-subtitle {
+  font-size: 1.2rem;
+}
+
+.word-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.0rem;
+}
+
+.group-box {
+  width: $screen-width;
+  border-radius: 0.5rem;
+  border-style: outset;
+  border-color: black;
+  border-width: 0.25rem;
+  background-color: $word-box-bg;
+}
+
+.group-title {
+  font-weight: 200;
+  font-size: 1.2rem;
+  margin-left: 1.0rem;
+  margin-top: 0.25rem;
+}
+
+.group-words-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.0rem;
+  margin-bottom: 1.0rem;
+  justify-content: center;
+}
+
+.word-input {
+  background-color: transparent;
+  border-style: none;
+  width: 11rem;
+  height: 2.0rem;
+}
+
+.group-box-yellow {
+  border-color: rgba($connections-yellow, 0.5);
+  background-color: $connections-yellow;
+  color: $word-box-bg;
+}
+
+.group-box-green {
+  border-color: rgba($connections-green, 0.5);
+  background-color: $connections-green;
+}
+
+.group-box-blue {
+  border-color: rgba($connections-blue, 0.5);
+  background-color: $connections-blue;
+}
+
+.group-box-purple {
+  border-color: rgba($connections-purple, 0.5);
+  background-color: $connections-purple;
+}
+
+.word-box {
+  width: 12rem;
+  height: 3.0rem;
+  border-radius: 0.5rem;
+  border-style: outset;
+  border-color: $word-box-border;
+  border-width: 0.25rem;
+  background-color: $word-box-bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.puzzle-validity-status {
+  display: flex;
+  border-style: solid;
+  border-radius: 0.5rem;
+  border-color: $word-box-border;
+  margin-top: 1rem;
+  align-items: center;
+  gap: 1.0rem;
+  padding: 0.5rem;
+
+  .good {
+    color: lightgreen;
+  }
+
+  .bad {
+    color: goldenrod;
+  }
+}

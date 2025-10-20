@@ -1,0 +1,79 @@
+<mat-tab-group dynamicHeight>
+  <mat-tab label="Play">
+
+    @if (addDataMessage)
+    {
+      <div class="message-box">
+        <mat-icon class="good" fontIcon="add_alert" /><div class="good">{{addDataMessage}}</div>
+      </div>
+    }
+
+    @for(puzzle of puzzles; track $index)
+    {
+      <div class="puzzle-list-box">
+        <mat-icon class="status-indicator" [fontIcon]="getIndicatorIcon(puzzle)" />
+        <div class="title">{{puzzle.title}}</div>
+        <div class="subtitle">{{puzzle.subtitle}}</div>
+        
+        @if (puzzle.status == PuzzleStatus.Complete)
+        {
+          <div class="score">Score: {{puzzle.points}}</div>
+          <div class="button-container">
+            <button matButton="outlined" (click)="playPuzzle(puzzle)">View Puzzle</button>
+          </div>
+        }
+        @else
+        {
+          <div class="button-container">
+            <button matButton="outlined" (click)="playPuzzle(puzzle)">Play</button>
+          </div>
+        }
+      </div>
+    }
+    @if (puzzles.length == 0)
+    {
+      <div class="no-list-items">
+        No puzzles found.
+      </div>
+      <div class="no-list-items">
+        Scan a QR code to load puzzles or go make some in the "Make" tab.
+      </div>
+    }
+  </mat-tab>
+  <mat-tab label="Make">
+
+    <div class="button-box">
+      <button matButton="outlined" (click)="makePuzzle()">+ New Puzzle</button>
+      <button matButton="outlined" (click)="shareSelected()" [disabled]="getSelected().length == 0">Share Selected</button>
+      <button matButton="outlined" (click)="deselectAll()" [disabled]="getSelected().length == 0">Deselect All</button>
+    </div>
+
+    @for(puzzle of madePuzzles; track $index)
+    {
+      <div class="puzzle-list-box" (click)="toggleSelect($index)">
+        <mat-icon class="status-indicator" fontIcon="menu" [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()"/>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="editPuzzle($index)"><mat-icon fontIcon="edit" />Edit</button>
+          <button mat-menu-item (click)="playtest($index)"><mat-icon fontIcon="play_circle" />Playtest</button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="deletePuzzle($index)" class="bad"><mat-icon fontIcon="delete" />Delete</button>
+        </mat-menu>
+
+        <div class="select-indicator">
+          @if (isSelected($index))
+          {
+            <mat-icon fontIcon="check_box_outline" />
+          }
+          @else
+          {
+            <mat-icon fontIcon="check_box_outline_blank" />
+          }
+          
+        </div>
+
+        <div class="title">{{puzzle.title}}</div>
+        <div class="subtitle">{{puzzle.subtitle}}</div>
+      </div>
+    }
+  </mat-tab>
+</mat-tab-group>

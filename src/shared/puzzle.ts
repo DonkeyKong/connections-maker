@@ -1,10 +1,13 @@
 import { Md5 } from "ts-md5"
 import { base64ToBase64Url } from "./base64url";
-import { GameService } from "./gameservice";
 
 export const GROUPSIZE: number = 4;
 export const NUMGROUPS: number = 4;
 export const WRONGGUESSES: number = 4;
+
+export const MINBONUS: number = 0.5;
+export const BONUSDECREASE: number = 0.2;
+export const BONUSPENALTY: number = 0.5;
 
 export enum GroupValue
 {
@@ -22,6 +25,13 @@ enum WordState
   Grouped
 }
 
+export enum PuzzleStatus
+{
+  NotStarted,
+  Started,
+  Complete
+}
+
 function idToValue(id: number) : GroupValue
 {
   switch (id)
@@ -34,17 +44,78 @@ function idToValue(id: number) : GroupValue
   }
 }
 
-export interface StorageGroup
+export function idToDefaultName(id: number) : string
+{
+  switch (id)
+  {
+    case 0: return "Easy Group";
+    case 1: return "Medium Group";
+    case 2: return "Hard Group";
+    case 3: return "Very Hard Group";
+    default: return `Group ${id+1}`;
+  }
+}
+
+function groupValueBasePoints(groupValue: GroupValue) : number
+{
+  switch (groupValue)
+  {
+    case GroupValue.Yellow:
+      return 10;
+    case GroupValue.Green:
+      return 20;
+    case GroupValue.Blue:
+      return 30;
+    case GroupValue.Purple:
+      return 40;
+    default:
+      return 0;
+  }
+}
+
+export enum PuzzleValidityResult
+{
+  Valid,
+  EmptyPuzzleTitle,
+  EmptyGroupTitle,
+  EmptyWord,
+  WrongGroupCount,
+  WrongGroupSize,
+  DuplicateWord
+}
+
+export function checkPuzzleValidity(puzzle: PuzzleStorage): PuzzleValidityResult
+{
+  if (puzzle.title == "") return PuzzleValidityResult.EmptyPuzzleTitle;
+  if (puzzle.groups.length != NUMGROUPS) return PuzzleValidityResult.WrongGroupCount;
+
+  const words: string[] = []
+  for (const group of puzzle.groups)
+  {
+    if (group.title == "") return PuzzleValidityResult.EmptyGroupTitle;
+    if (group.items.length != GROUPSIZE) return PuzzleValidityResult.WrongGroupSize;
+    for (const word of group.items)
+    {
+      if (word == "") return PuzzleValidityResult.EmptyWord;
+      if (words.includes(word)) return PuzzleValidityResult.DuplicateWord;
+      words.push(word);
+    }
+  }
+
+  return PuzzleValidityResult.Valid;
+}
+
+export interface GroupStorage
 {
   title: string;
   items: string[];
 }
 
-export interface StorageRound
+export interface PuzzleStorage
 {
   title: string;
-  description: string;
-  groups: StorageGroup[];
+  subtitle: string;
+  groups: GroupStorage[];
 }
 
 export class Word
@@ -104,7 +175,7 @@ export class Group
   public readonly id: number;
   public readonly value: GroupValue;
 
-  constructor(storage: StorageGroup, id: number)
+  constructor(storage: GroupStorage, id: number)
   {
     this.title = storage.title;
     this.id = id;
@@ -129,11 +200,11 @@ export interface Guess
   isCorrect: boolean;
 }
 
-export class Round
+export class Puzzle
 {
-  // Static info about this round
+  // Static info about this puzzle
   public readonly title: string;
-  public readonly description: string;
+  public readonly subtitle: string;
   public readonly groups: Group[];
   public readonly startingConfig: number[] | undefined;
 
@@ -142,17 +213,18 @@ export class Round
   public words: Word[] = [];
   public guesses: Guess[] = [];
   public points: number = 0;
+  public bonusMultiplier: number = 2.0;
   private loaded: boolean = false;
 
-  constructor(storageRound: StorageRound)
+  constructor(PuzzleStorage: PuzzleStorage)
   {
-    this.title = storageRound.title;
-    this.description = storageRound.description;
+    this.title = PuzzleStorage.title;
+    this.subtitle = PuzzleStorage.subtitle;
 
     var groups: Group[] = [];
-    for (var i=0; i < storageRound.groups.length; ++i)
+    for (var i=0; i < PuzzleStorage.groups.length; ++i)
     {
-      groups.push(new Group(storageRound.groups[i], i));
+      groups.push(new Group(PuzzleStorage.groups[i], i));
     }
     this.groups = groups;
 
@@ -220,9 +292,23 @@ export class Round
         guessWord.removeFromPlay();
       }
 
+      const group = this.groups[guessWords[0].groupId];
+
       // Add a new found group
-      this.groupsFound.push(this.groups[guessWords[0].groupId]);
+      this.groupsFound.push(group);
+
+      // Add points for getting group and lower bonus by a small amount
+      this.points += groupValueBasePoints(group.value) * this.bonusMultiplier;
+      this.bonusMultiplier -= BONUSDECREASE;
     }
+    else
+    {
+      // No points for wrong guess, plus larger bonus decrease
+      this.bonusMultiplier -= BONUSPENALTY;
+    }
+
+    // Clamp the bonus to the minimum
+    this.bonusMultiplier = Math.max(this.bonusMultiplier, MINBONUS);
 
     // Add the guess to the play history
     this.guesses.push(guess);
@@ -310,9 +396,13 @@ export class Round
     }
   }
 
-  public get complete(): boolean
+  public get status(): PuzzleStatus
   {
-    return this.wrongGuessesRemaining == 0 || this.groupsFound.length == NUMGROUPS;
+    if (this.wrongGuessesRemaining == 0 || this.groupsFound.length == NUMGROUPS)
+      return PuzzleStatus.Complete;
+    if (this.guesses.length > 0)
+      return PuzzleStatus.Started;
+    return PuzzleStatus.NotStarted;
   }
 
   public get win(): boolean
@@ -320,7 +410,7 @@ export class Round
     return this.groupsFound.length == NUMGROUPS;
   }
 
-  // Get an 16 character alphanumeric hash unique to this round
+  // Get an 16 character alphanumeric hash unique to this puzzle
   public get hash(): string
   {
     const int32array = Md5.hashStr(this.groups.map((g)=>g.itemsString).join("; "), true);

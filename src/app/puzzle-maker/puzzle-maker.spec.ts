@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RoundManager } from './round-manager';
+import { PuzzleMaker } from './puzzle-maker';
 
-describe('RoundManager', () => {
-  let component: RoundManager;
-  let fixture: ComponentFixture<RoundManager>;
+describe('PuzzleMaker', () => {
+  let component: PuzzleMaker;
+  let fixture: ComponentFixture<PuzzleMaker>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RoundManager]
+      imports: [PuzzleMaker]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(RoundManager);
+    fixture = TestBed.createComponent(PuzzleMaker);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

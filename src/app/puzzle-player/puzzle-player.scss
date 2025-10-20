@@ -1,0 +1,195 @@
+@use '../app.scss' as *;
+
+.puzzle-info-container {
+  margin-bottom: 1.0rem;
+  //display: flex;
+  //gap: 0.5rem;
+  //align-items: baseline;
+}
+
+.puzzle-title {
+  font-size: 1.5rem;
+}
+
+.puzzle-subtitle {
+    font-size: 1.0rem;
+    color: var(--mat-sys-primary);
+    font-weight: 100;
+    margin-top: 0.25rem;
+}
+
+.word-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.333rem;
+}
+
+.group-box {
+  width: $screen-width;
+  height: 3.0rem;
+  border-radius: 0.5rem;
+  border-style: outset;
+  border-color: black;
+  border-width: 0.25rem;
+  background-color: $word-box-bg;
+  overflow: hidden;
+
+  /* Animation */
+  animation: show 600ms 100ms cubic-bezier(0.38, 0.97, 0.56, 0.76) forwards;
+  opacity: 0;
+  transform: rotateX(-90deg);
+  transform-origin: top center;
+}
+
+@keyframes show {
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.group-title {
+  font-weight: 200;
+  font-size: 1.2rem;
+  margin-left: 1.0rem;
+  margin-top: 0.25rem;
+}
+
+.group-items {
+  width: 27rem;
+  margin-left: 1.0rem;
+}
+
+.group-box-yellow {
+  border-color: rgba($connections-yellow, 0.5);
+  background-color: $connections-yellow;
+  color: $word-box-bg;
+}
+
+.group-box-green {
+  border-color: rgba($connections-green, 0.5);
+  background-color: $connections-green;
+}
+
+.group-box-blue {
+  border-color: rgba($connections-blue, 0.5);
+  background-color: $connections-blue;
+}
+
+.group-box-purple {
+  border-color: rgba($connections-purple, 0.5);
+  background-color: $connections-purple;
+}
+
+.word-box {
+  width: 6.25rem;
+  height: 3.0rem;
+  border-radius: 0.5rem;
+  border-style: outset;
+  border-color: $word-box-border;
+  border-width: 0.25rem;
+  background-color: $word-box-bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-user-select: none; /* Safari */
+  user-select: none; /* Non-prefixed version, 
+                        currently supported by all other modern browsers */
+}
+
+.word-box-selected {
+  background-color: $word-box-selected;
+  border-color: $word-box-selected;
+}
+
+.word-box-wrong {
+  animation: 400ms linear 100ms 1 wrong-shake;
+}
+
+@keyframes wrong-shake {
+  10% {
+    translate: 1.0rem 0;
+  }
+
+  30% {
+    translate: -1.0rem 0;
+  }
+
+  50% {
+    translate: 1.0rem 0;
+  }
+
+  70% {
+    translate: -1.0rem 0;
+  }
+
+  90% {
+    translate: 1.0rem 0;
+  }
+
+  100% {
+    translate: 0 0;
+  }
+}
+
+.word-box-hidden {
+  display: none;
+}
+
+.word-box-game-over {
+  opacity: 25%;
+}
+
+.guesses-box {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1.0rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.guess-marker {
+  height: 1rem;
+  width: 1rem;
+  background-color: $word-box-selected;
+  border-radius: 0.5rem;
+}
+
+.game-over-message {
+  font-size: 1.2rem;
+  margin-top: 1.0rem;
+}
+
+.puzzle-score-container
+{
+  font-size: 1.2rem;
+  margin-top: 1.0rem;
+  margin-bottom: 1.0rem;
+  display: flex;
+  gap: 0.5rem;
+
+  .box {
+    display: flex;
+    border-style: solid;
+    border-width: 0.1rem;
+    border-color: $word-box-border;
+    border-radius: 0.5rem;
+    width: 14rem;
+    height: 2.0rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .label {
+    font-weight: 400;
+    margin-right: 1.0rem;
+  }
+
+  .value {
+    font-weight: 200;
+  }
+
+}
+
