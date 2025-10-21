@@ -5,19 +5,39 @@
     "groups": [
       {
         "title": "Mythical Creatures in Constellations",
-        "items": ["Unicorn", "Hydra", "Pegasus", "Phoenix"]
+        "items": [
+          "Unicorn",
+          "Hydra",
+          "Pegasus",
+          "Phoenix"
+        ]
       },
       {
         "title": "Local Names for Mountain Lions",
-        "items": ["Cougar", "Puma", "Panther", "Catamount"]
+        "items": [
+          "Cougar",
+          "Puma",
+          "Panther",
+          "Catamount"
+        ]
       },
       {
         "title": "Western Zodiac Animals",
-        "items": ["Bull", "Lion", "Crab", "Scorpion"]
+        "items": [
+          "Bull",
+          "Lion",
+          "Crab",
+          "Scorpion"
+        ]
       },
       {
         "title": "Chinese Zodiac Animals",
-        "items": ["Ox", "Tiger", "Horse", "Pig"]
+        "items": [
+          "Ox",
+          "Tiger",
+          "Horse",
+          "Pig"
+        ]
       }
     ]
   },
@@ -27,19 +47,39 @@
     "groups": [
       {
         "title": "Washing machine cycles",
-        "items": ["Spin", "Rinse", "Soak", "Wash"]
+        "items": [
+          "Spin",
+          "Rinse",
+          "Soak",
+          "Wash"
+        ]
       },
       {
         "title": "Tired",
-        "items": ["Beat", "Weary", "Bushed", "Spent"]
+        "items": [
+          "Beat",
+          "Weary",
+          "Bushed",
+          "Spent"
+        ]
       },
       {
         "title": "Collection of songs",
-        "items": ["Mix", "Set", "Playlist", "Repertoire"]
+        "items": [
+          "Mix",
+          "Set",
+          "Playlist",
+          "Repertoire"
+        ]
       },
       {
         "title": "One-Two Buckle My...",
-        "items": ["Shoe", "Door", "Sticks", "Straight"]
+        "items": [
+          "Shoe",
+          "Door",
+          "Sticks",
+          "Straight"
+        ]
       }
     ]
   },
@@ -49,19 +89,39 @@
     "groups": [
       {
         "title": "To eat quickly",
-        "items": ["Wolf", "Gobble", "Scarf", "Bolt"]
+        "items": [
+          "Wolf",
+          "Gobble",
+          "Scarf",
+          "Bolt"
+        ]
       },
       {
         "title": "Blood-takers",
-        "items": ["Mosquito", "Vampire", "Tick", "Phlebotomist"]
+        "items": [
+          "Mosquito",
+          "Vampire",
+          "Tick",
+          "Phlebotomist"
+        ]
       },
       {
         "title": "___-ass",
-        "items": ["Kick", "Bad", "Dumb", "Swamp"]
+        "items": [
+          "Kick",
+          "Bad",
+          "Dumb",
+          "Swamp"
+        ]
       },
       {
         "title": "McDonaldland Residents",
-        "items": ["Clown", "Monster", "Bird", "Thief"]
+        "items": [
+          "Clown",
+          "Monster",
+          "Bird",
+          "Thief"
+        ]
       }
     ]
   },
@@ -71,41 +131,81 @@
     "groups": [
       {
         "title": "Pine tree products",
-        "items": ["Pitch", "Needle", "Cone", "Nuts"]
+        "items": [
+          "Pitch",
+          "Needle",
+          "Cone",
+          "Nut"
+        ]
       },
       {
-        "title": "Candy ___",
-        "items": ["Cane", "Necklace", "Corn", "Apple"]
+        "title": "Federal Holidays with Day",
+        "items": [
+          "Memorial",
+          "Independence",
+          "Labor",
+          "Veterans"
+        ]
       },
       {
-        "title": "Things with Trunks",
-        "items": ["Elephant", "Tree", "Car", "Attic"]
+        "title": "Plant Crafts",
+        "items": [
+          "Wreath",
+          "Garland",
+          "Lei",
+          "Bouquet"
+        ]
       },
       {
-        "title": "Wearable Plant Crafts",
-        "items": ["Garland", "Lei", "Coronet", "Chaplet"]
+        "title": "Types of Skiing",
+        "items": [
+          "Freestyle",
+          "Telemark",
+          "Alpine",
+          "Cross-country"
+        ]
       }
     ]
   },
   {
     "subtitle": "December 23rd",
-    "title": "Here we Come A-wassailing!",
+    "title": "Here We Come A-wassailing!",
     "groups": [
       {
-        "title": "Up on the Rooftop",
-        "items": ["Paws", "Klaus", "Toys", "Joys"]
+        "title": "Up on the Housetop",
+        "items": [
+          "Reindeer Paws",
+          "Santa Claus",
+          "Lots of Toys",
+          "Christmas Joys"
+        ]
+      },
+      {
+        "title": "Deck the Halls",
+        "items": [
+          "Holly",
+          "Jolly",
+          "Apparel",
+          "Carol"
+        ]
       },
       {
         "title": "Jingle Bells",
-        "items": ["Snow", "Sleigh", "Go", "Way"]
+        "items": [
+          "Snow",
+          "Sleigh",
+          "Go",
+          "Way"
+        ]
       },
       {
-        "title": "O Holy Night",
-        "items": ["Night", "Shining", "Birth", "Pining"]
-      },
-      {
-        "title": "All I Want For Christmas is You",
-        "items": ["Christmas", "Need", "Presents", "Tree"]
+        "title": "Silent Night",
+        "items": [
+          "Night",
+          "Calm",
+          "Bright",
+          "Virgin"
+        ]
       }
     ]
   },
@@ -115,41 +215,81 @@
     "groups": [
       {
         "title": "Miracle on 34th Street (1947)",
-        "items": ["Macy's", "Dead Letters", "Trial", "Dream House"]
+        "items": [
+          "Macy's",
+          "Dead Letters",
+          "Trial",
+          "Dream House"
+        ]
       },
       {
         "title": "It's a Wonderful Life (1946)",
-        "items": ["Money", "Angel", "Potter", "Bell"]
+        "items": [
+          "Money",
+          "Angel",
+          "Potter",
+          "Bell"
+        ]
       },
       {
         "title": "Rudolph The Red-Nosed Reindeer (1964)",
-        "items": ["Dentist", "Prospector", "Yeti", "Misfits"]
+        "items": [
+          "Dentist",
+          "Prospector",
+          "Yeti",
+          "Misfits"
+        ]
       },
       {
         "title": "Elf (2003)",
-        "items": ["Orphan", "Snowball Fight", "Publisher", "Sugar"]
+        "items": [
+          "Orphan",
+          "Snowball Fight",
+          "Publisher",
+          "Sugar"
+        ]
       }
     ]
   },
   {
     "subtitle": "December 25th",
-    "title": "Merry Christmas, everyone!",
+    "title": "Merry Christmas, Everyone!",
     "groups": [
       {
         "title": "Holiday vocal performance",
-        "items": ["Carol", "Wassail", "Sing", "Belt"]
+        "items": [
+          "Carol",
+          "Wassail",
+          "Sing",
+          "Belt"
+        ]
       },
       {
         "title": "Reindeer Actions",
-        "items": ["Dash", "Dance", "Prance", "Blitz"]
+        "items": [
+          "Dash",
+          "Dance",
+          "Prance",
+          "Blitz"
+        ]
       },
       {
         "title": "Frosty's Head Decor",
-        "items": ["Pipe", "Button", "Coal", "Hat"]
+        "items": [
+          "Pipe",
+          "Button",
+          "Coal",
+          "Hat"
+        ]
       },
       {
         "title": "Santa's Second Name",
-        "items": ["Claus", "Nicholas", "Kringle", "Noel"]
+        "items": [
+          "Claus",
+          "Nicholas",
+          "Kringle",
+          "Noel"
+        ]
       }
     ]
   }
