@@ -4,9 +4,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
-import { Subscription } from 'rxjs';
 
-import { Word, GroupValue, GROUPSIZE, PuzzleStorage, checkPuzzleValidity, NUMGROUPS, idToDefaultName, PuzzleValidityResult } from '../../shared/puzzle';
+import { GroupValue, GROUPSIZE, PuzzleStorage, checkPuzzleValidity, NUMGROUPS, idToDefaultName, PuzzleValidityResult } from '../../shared/puzzle';
 import { GameService } from '../../shared/game-service';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -26,7 +25,6 @@ export class PuzzleMaker implements OnInit {
   public puzzle: PuzzleStorage;
   public puzzleId: number;
   public validityStatus: PuzzleValidityResult;
-  private subscription?: Subscription;
   
   constructor(private gameService: GameService,
               private route: ActivatedRoute,
@@ -38,7 +36,7 @@ export class PuzzleMaker implements OnInit {
   }
 
   ngOnInit(): void {
-    this.subscription = this.route.paramMap.subscribe((params) => {
+    this.route.paramMap.subscribe((params) => {
       this.puzzleId = -1;
       const idStr = params.get('id');
       if (idStr)
@@ -104,5 +102,4 @@ export class PuzzleMaker implements OnInit {
     this.puzzle.groups[groupAIdx] = this.puzzle.groups[groupBIdx];
     this.puzzle.groups[groupBIdx] = groupA;
   }
-
 }

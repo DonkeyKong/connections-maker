@@ -6,14 +6,12 @@ import { MatMenuModule } from '@angular/material/menu'
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDialog } from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
 
 import { ShareDialog } from '../share-dialog/share-dialog';
 import { Puzzle, PuzzleStatus, PuzzleStorage, MAXSTARS } from '../../shared/puzzle';
 import { GzipBase64Compressor } from '../../shared/gzip-base64-compressor';
 import { base64UrlToBase64 } from '../../shared/base64url';
 import { GameService } from '../../shared/game-service';
-
 
 @Component({
   selector: 'app-puzzle-list',
