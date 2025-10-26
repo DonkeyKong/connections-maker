@@ -6,7 +6,9 @@ import { MatMenuModule } from '@angular/material/menu'
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDialog } from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
+import { saveAs } from 'file-saver';
 
+import { ImportDialog } from '../import-dialog/import-dialog';
 import { ShareDialog } from '../share-dialog/share-dialog';
 import { Puzzle, PuzzleStatus, PuzzleStorage, MAXSTARS } from '../../shared/puzzle';
 import { GzipBase64Compressor } from '../../shared/gzip-base64-compressor';
@@ -135,10 +137,19 @@ export class PuzzleList implements OnInit, AfterViewInit {
     if (puzzle.status == PuzzleStatus.Complete && puzzle.win)
       return "check_circle";
     if (puzzle.status == PuzzleStatus.Complete && !puzzle.win)
-      return "check_circle_outline";
+      return "heart_broken";
     if (puzzle.status == PuzzleStatus.Started)
       return "sync"
     return ""
+  }
+
+  public getPlayString(puzzle: Puzzle): string
+  {
+    if (puzzle.status == PuzzleStatus.Complete)
+      return "View Results";
+    if (puzzle.status == PuzzleStatus.Started)
+      return "Resume Playing"
+    return "Play"
   }
 
   public deselectAll(): void
@@ -187,4 +198,41 @@ export class PuzzleList implements OnInit, AfterViewInit {
     return `width: ${puzzle.starScore * 2.0}rem`;
   }
 
+  public exportSelectedPuzzles()
+  {
+    const selectedPuzzles = this.getSelected();
+    if (selectedPuzzles.length > 0)
+    {
+      var file = new File([JSON.stringify(selectedPuzzles, null, 2)], "puzzle-export.json", {type: "text/json;charset=utf-8"});
+      saveAs(file);
+    }
+  }
+
+  public deleteSelected(): void
+  {
+    // Get indicies to delete
+    const puzzlesToDelete: number[] = [];
+    for (const [ind, sel] of this.selected)
+    {
+      if (sel)
+      {
+        puzzlesToDelete.push(ind);
+      }
+    }
+    
+    // Do a reverse sort and delete from the bottom up
+    puzzlesToDelete.sort((a,b)=>b-a);
+    for (const i of puzzlesToDelete)
+    {
+      this.gameService.deletePuzzle(i);
+    }
+
+    // Clear all selected
+    this.selected = new Map<number, boolean>();
+  }
+
+  public showImportDialog(): void
+  {
+    this.dialog.open(ImportDialog, {data: this.gameService });
+  }
 }

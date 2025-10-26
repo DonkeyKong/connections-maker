@@ -1,0 +1,24 @@
+
+<div class="dialog-container">
+  <h2>Import Puzzles</h2>
+
+  <div class="file-upload-container">
+    <input type="file" class="file-upload" [disabled]="busy" accept=".txt, .json, text/plain, text/json" (change)="onFilesSelected($event.target.files)">
+  </div>
+
+  <div class="importOption">If an imported puzzle has the same name as an existing puzzle...</div>
+  <div class="importOption">
+    <mat-form-field>
+      <mat-select [(value)]="selectedMergeStrategy" [disabled]="busy">
+        <mat-option [value]="MergeStrategy.Duplicate">Make a Duplicate</mat-option>
+        <mat-option [value]="MergeStrategy.Replace">Replace Existing</mat-option>
+        <mat-option [value]="MergeStrategy.Skip">Skip Import</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="button-box">
+    <button mat-button matButton="outlined" (click)="import()" [disabled]="!fileList || busy">Import</button>
+  </div>
+  
+</div>

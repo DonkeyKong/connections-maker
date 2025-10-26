@@ -1,10 +1,16 @@
 import { PuzzleStorage, Puzzle, Guess } from "./puzzle"
-import { GzipBase64Compressor } from "./gzip-base64-compressor"
 
 export interface RoundSaveData
 {
   guesses: Guess[];
   points: number;
+}
+
+export enum MergeStrategy
+{
+  Duplicate,
+  Replace,
+  Skip
 }
 
 export class GameService
@@ -118,5 +124,29 @@ export class GameService
     }
     localStorage.setItem("MadePuzzles", JSON.stringify(this._madePuzzleStorage));
     return puzzleId;
+  }
+
+  public importMadePuzzles(puzzleJson: string, mergeStrategy: MergeStrategy = MergeStrategy.Duplicate)
+  {
+    //puzzleFile.text().then((puzzleJson: string)=>{
+      const importedPuzzles = JSON.parse(puzzleJson) as PuzzleStorage[];
+
+      for (const importedPuzzle of importedPuzzles)
+      {
+        let existingPuzzleIndex = this.madePuzzles.findIndex((p)=>(p.title == importedPuzzle.title));
+        if (mergeStrategy == MergeStrategy.Skip && existingPuzzleIndex != -1)
+        {
+          continue;
+        }
+        else if (mergeStrategy == MergeStrategy.Replace)
+        {
+          this.saveMadePuzzle(importedPuzzle, existingPuzzleIndex);
+        }
+        else 
+        {
+          this.saveMadePuzzle(importedPuzzle, -1);
+        }
+      }
+    //});
   }
 }

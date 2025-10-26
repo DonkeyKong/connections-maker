@@ -104,17 +104,6 @@
       <button matButton="outlined" (click)="submit()" [disabled]="wrongAnim">Submit</button>
     </div>
   }
-  @else 
-  {
-    @if (puzzle.win)
-    {
-      <div class="game-over-message">Congratulations! You've completed the puzzle.</div>
-    }
-    @else
-    {
-      <div class="game-over-message">Sorry, you're out of guesses. Puzzle over.</div>
-    }
-  }
 }
 
 </div>

@@ -61,10 +61,11 @@ $max-screen-width: 50rem;
   margin-right: auto;
   margin-top: 1.0rem;
   display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
   align-items: center;
   justify-content: center;
-  width: $screen-width;
+  width: 100%;
 }
 
 .button-container {

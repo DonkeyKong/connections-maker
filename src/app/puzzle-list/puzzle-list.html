@@ -29,19 +29,12 @@
           }
           @else 
           {
-            <mat-icon class="star-icon" fontIcon="heart_broken" />
+            <div class="score">No Stars</div>
           }
-
-          <div class="button-container">
-            <button matButton="outlined" (click)="playPuzzle(puzzle)">View Puzzle</button>
-          </div>
         }
-        @else
-        {
-          <div class="button-container">
-            <button matButton="outlined" (click)="playPuzzle(puzzle)">Play</button>
-          </div>
-        }
+        <div class="button-container">
+            <button matButton="outlined" (click)="playPuzzle(puzzle)">{{getPlayString(puzzle)}}</button>
+        </div>
       </div>
     }
     @if (puzzles.length == 0)
@@ -57,20 +50,36 @@
   <mat-tab label="Make">
 
     <div class="button-box">
-      <!-- <button matButton="outlined" (click)="selectAll()">Select All</button> -->
-      <button matButton="outlined" (click)="deselectAll()" [disabled]="getSelected().length == 0">Deselect All</button>
-      <button matButton="outlined" (click)="shareSelected()" [disabled]="getSelected().length == 0">Share Selected</button>
+      <button matButton="outlined" (click)="makePuzzle()">
+        <mat-icon fontIcon="add" />New Puzzle
+      </button>
+      <button matButton="outlined" (click)="shareSelected()" [disabled]="getSelected().length == 0">
+        <mat-icon fontIcon="share" /> Share Selected
+      </button>
       
-    </div>
-    <div class="button-box">
-      <button matButton="outlined" (click)="makePuzzle()">+ New Puzzle</button>
+      <button matButton="outlined" [matMenuTriggerFor]="makemenu">More...</button>
+      
+      <mat-menu #makemenu="matMenu">
+
+        <button mat-menu-item (click)="selectAll()"><mat-icon fontIcon="select_all" />Select All</button>
+        <button mat-menu-item (click)="deselectAll()" [disabled]="getSelected().length == 0"><mat-icon fontIcon="deselect" />Select None</button>
+
+        <mat-divider></mat-divider>
+
+        <button mat-menu-item (click)="showImportDialog()"><mat-icon fontIcon="upload" />Import...</button>
+        <button mat-menu-item (click)="exportSelectedPuzzles()" [disabled]="getSelected().length == 0"><mat-icon fontIcon="download" />Export Selected</button>
+        
+        <mat-divider></mat-divider>
+        
+        <button mat-menu-item (click)="deleteSelected()" class="bad" [disabled]="getSelected().length == 0"><mat-icon fontIcon="delete" />Delete Selected</button>
+      </mat-menu>
     </div>
 
     @for(puzzle of madePuzzles; track $index)
     {
       <div class="puzzle-list-box" (click)="toggleSelect($index)" id="m-{{$index}}">
-        <mat-icon class="status-indicator" fontIcon="menu" [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()"/>
-        <mat-menu #menu="matMenu">
+        <mat-icon class="status-indicator" fontIcon="more_vert" [matMenuTriggerFor]="itemmenu" (click)="$event.stopPropagation()"/>
+        <mat-menu #itemmenu="matMenu">
           <button mat-menu-item (click)="editPuzzle($index)"><mat-icon fontIcon="edit" />Edit</button>
           <button mat-menu-item (click)="playtest($index)"><mat-icon fontIcon="play_circle" />Playtest</button>
           <mat-divider></mat-divider>
