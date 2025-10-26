@@ -127,7 +127,7 @@
   },
   {
     "subtitle": "December 22nd",
-    "title": "Almost Christmas",
+    "title": "A Short Rest",
     "groups": [
       {
         "title": "Pine tree products",
@@ -289,6 +289,90 @@
           "Nicholas",
           "Kringle",
           "Noel"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "So Says Caesar",
+    "subtitle": "November 1st",
+    "groups": [
+      {
+        "title": "Honda Models",
+        "items": [
+          "Odyssey",
+          "Accord",
+          "Pilot",
+          "Civic"
+        ]
+      },
+      {
+        "title": "Polar ___",
+        "items": [
+          "Bear",
+          "Fleece",
+          "Seltzer",
+          "Express"
+        ]
+      },
+      {
+        "title": "Salads",
+        "items": [
+          "Wedge",
+          "Caesar",
+          "Greek",
+          "Potato"
+        ]
+      },
+      {
+        "title": "Famous Adams",
+        "items": [
+          "Driver",
+          "Scott",
+          "West",
+          "Levine"
+        ]
+      }
+    ]
+  },
+  {
+    "title": "For the Birds",
+    "subtitle": "November 2nd",
+    "groups": [
+      {
+        "title": "Animal Homes",
+        "items": [
+          "Roost",
+          "Den",
+          "Lodge",
+          "Burrow"
+        ]
+      },
+      {
+        "title": "Feathers",
+        "items": [
+          "Crest",
+          "Quill",
+          "Plume",
+          "Down"
+        ]
+      },
+      {
+        "title": "To Follow",
+        "items": [
+          "Course",
+          "Shadow",
+          "Stalk",
+          "Track"
+        ]
+      },
+      {
+        "title": "Penguin Species",
+        "items": [
+          "Macaroni",
+          "Emperor",
+          "King",
+          "Chinstrap"
         ]
       }
     ]

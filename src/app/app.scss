@@ -7,6 +7,7 @@ $word-box-border: rgb(120, 120, 120);
 $word-box-selected: rgb(211, 76, 76);
 
 $screen-width: 24rem;
+$max-screen-width: 50rem;
 
 .game-header {
   display: flex;
@@ -44,12 +45,15 @@ $screen-width: 24rem;
   background-color: $connections-purple;
 }
 
+.component-margin {
+  margin: 1.0rem;
+}
+
 .component-container {
-  width: $screen-width;
+  min-width: $screen-width;
+  max-width: $max-screen-width;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 1.0rem;
-  margin-bottom: 1.0rem;
 }
 
 .button-box {

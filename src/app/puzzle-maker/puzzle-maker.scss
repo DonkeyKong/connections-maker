@@ -1,44 +1,44 @@
 @use '../app.scss' as *;
 
-.title-input {
-  width: 100%;
-}
-
-.puzzle-info-container {
-  margin-bottom: 1.0rem;
+.title-flex {
+  width: $screen-width - 0.5rem;
   display: flex;
   gap: 0.5rem;
-  align-items: baseline;
 }
 
-.puzzle-title {
-  font-size: 1.5rem;
+.updown-flex {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-right: 0.5rem;
+  height: 3.5rem;
+  justify-content: center;
 }
 
-.puzzle-subtitle {
-  font-size: 1.2rem;
+.title-input {
+  width: $screen-width;
+}
+
+.group-title-input {
+  width: 100%;
+  flex-shrink: 1;
 }
 
 .word-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 1.0rem;
+  align-items: center;
+  justify-content: center;
 }
 
 .group-box {
-  width: $screen-width;
+  width: $screen-width - 0.5rem;
   border-radius: 0.5rem;
   border-style: outset;
   border-color: black;
   border-width: 0.25rem;
   background-color: $word-box-bg;
-}
-
-.group-title {
-  font-weight: 200;
-  font-size: 1.2rem;
-  margin-left: 1.0rem;
-  margin-top: 0.25rem;
 }
 
 .group-words-flex {

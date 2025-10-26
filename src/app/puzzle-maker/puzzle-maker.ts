@@ -94,4 +94,15 @@ export class PuzzleMaker implements OnInit {
     this.validityStatus = checkPuzzleValidity(this.puzzle!);
   }
 
+  swapGroups(groupAIdx: number, groupBIdx: number): void
+  {
+    if (groupAIdx < 0 || groupAIdx >= NUMGROUPS || groupBIdx < 0 || groupBIdx >= NUMGROUPS)
+    {
+      return;
+    }
+    const groupA = this.puzzle.groups[groupAIdx];
+    this.puzzle.groups[groupAIdx] = this.puzzle.groups[groupBIdx];
+    this.puzzle.groups[groupBIdx] = groupA;
+  }
+
 }

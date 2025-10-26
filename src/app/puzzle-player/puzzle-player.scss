@@ -1,10 +1,13 @@
 @use '../app.scss' as *;
 
+.puzzle-column {
+  margin-left: auto;
+  margin-right: auto;
+  width: $screen-width;
+}
+
 .puzzle-info-container {
   margin-bottom: 1.0rem;
-  //display: flex;
-  //gap: 0.5rem;
-  //align-items: baseline;
 }
 
 .puzzle-title {

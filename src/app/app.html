@@ -9,15 +9,17 @@
 </div>
 <hr>
 
-<div class="component-container">
+<div class="component-margin">
+  <div class="component-container">
 
-  <router-outlet />
+    <router-outlet />
 
-  @if (showBackButton)
-  {
-    <div class="button-box">
-      <button matButton="outlined" (click)="navigateToMenu()">Return to Puzzle List</button>
-    </div>
-  }
+    @if (showBackButton)
+    {
+      <div class="button-box">
+        <button matButton="outlined" (click)="navigateToMenu()">Return to Puzzle List</button>
+      </div>
+    }
 
+  </div>
 </div>

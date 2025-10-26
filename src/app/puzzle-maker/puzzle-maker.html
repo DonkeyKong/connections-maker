@@ -1,20 +1,31 @@
-<mat-form-field class="title-input">
-  <mat-label>Puzzle Title</mat-label>
-  <input matInput [(ngModel)]="puzzle.title" (ngModelChange)="validateForm()">
-</mat-form-field>
 
-<mat-form-field class="title-input">
-  <mat-label>Subtitle</mat-label>
-  <input matInput [(ngModel)]="puzzle.subtitle" (ngModelChange)="validateForm()">
-</mat-form-field>
+<div class="word-grid">
+  <mat-form-field class="title-input">
+    <mat-label>Puzzle Title</mat-label>
+    <input matInput [(ngModel)]="puzzle.title" (ngModelChange)="validateForm()">
+  </mat-form-field>
+
+  <mat-form-field class="title-input">
+    <mat-label>Subtitle</mat-label>
+    <input matInput [(ngModel)]="puzzle.subtitle" (ngModelChange)="validateForm()">
+  </mat-form-field>
+</div>
 
 <div class="word-grid">
 
   <div class="group-box group-box-yellow">
-    <mat-form-field class="title-input">
-      <mat-label>Group Description</mat-label>
-      <input matInput [(ngModel)]="puzzle.groups[0].title" (ngModelChange)="validateForm()">
-    </mat-form-field>
+
+    <div class="title-flex">
+      <mat-form-field class="group-title-input">
+        <mat-label>Group Description</mat-label>
+        <input matInput [(ngModel)]="puzzle.groups[0].title" (ngModelChange)="validateForm()">
+      </mat-form-field>
+
+      <div class="updown-flex">
+        <mat-icon fontIcon="arrow_upward_alt" (click)="swapGroups(0,3)" />
+        <mat-icon fontIcon="arrow_downward_alt" (click)="swapGroups(0,1)" />
+      </div>
+    </div>
 
     <div class="group-words-flex">
       <div class="word-box">
@@ -34,10 +45,17 @@
   </div>
 
   <div class="group-box group-box-green">
-    <mat-form-field class="title-input">
-      <mat-label>Group Description</mat-label>
-      <input matInput [(ngModel)]="puzzle.groups[1].title"  (ngModelChange)="validateForm()">
-    </mat-form-field>
+    <div class="title-flex">
+      <mat-form-field class="group-title-input">
+        <mat-label>Group Description</mat-label>
+        <input matInput [(ngModel)]="puzzle.groups[1].title"  (ngModelChange)="validateForm()">
+      </mat-form-field>
+
+      <div class="updown-flex">
+          <mat-icon fontIcon="arrow_upward_alt" (click)="swapGroups(1,0)" />
+          <mat-icon fontIcon="arrow_downward_alt" (click)="swapGroups(1,2)" />
+      </div>
+    </div>
 
     <div class="group-words-flex">
       <div class="word-box">
@@ -57,10 +75,17 @@
   </div>
 
   <div class="group-box group-box-blue">
-    <mat-form-field class="title-input">
-      <mat-label>Group Description</mat-label>
-      <input matInput [(ngModel)]="puzzle.groups[2].title" (ngModelChange)="validateForm()">
-    </mat-form-field>
+    <div class="title-flex">
+      <mat-form-field class="group-title-input">
+        <mat-label>Group Description</mat-label>
+        <input matInput [(ngModel)]="puzzle.groups[2].title" (ngModelChange)="validateForm()">
+      </mat-form-field>
+
+      <div class="updown-flex">
+          <mat-icon fontIcon="arrow_upward_alt" (click)="swapGroups(2,1)" />
+          <mat-icon fontIcon="arrow_downward_alt" (click)="swapGroups(2,3)" />
+      </div>
+    </div>
 
     <div class="group-words-flex">
       <div class="word-box">
@@ -80,10 +105,17 @@
   </div>
 
   <div class="group-box group-box-purple">
-    <mat-form-field class="title-input">
-      <mat-label>Group Description</mat-label>
-      <input matInput [(ngModel)]="puzzle.groups[3].title" (ngModelChange)="validateForm()">
-    </mat-form-field>
+    <div class="title-flex">
+      <mat-form-field class="group-title-input">
+        <mat-label>Group Description</mat-label>
+        <input matInput [(ngModel)]="puzzle.groups[3].title" (ngModelChange)="validateForm()">
+      </mat-form-field>
+
+      <div class="updown-flex">
+        <mat-icon fontIcon="arrow_upward_alt" (click)="swapGroups(3,2)" />
+        <mat-icon fontIcon="arrow_downward_alt" (click)="swapGroups(3,0)" />
+      </div>
+    </div>
 
     <div class="group-words-flex">
       <div class="word-box">
