@@ -22,9 +22,10 @@ export class PuzzlePlayer implements OnInit {
 
   public puzzle?: Puzzle;
   private isPlaytest: boolean = false;
-  private subscription?: Subscription;
   public wrongAnim: boolean = false;
   public oneAwayAnim: boolean = false;
+  public puzzleHash: string = "";
+  public madePuzzleId: number = -1;
   
   constructor(private gameService: GameService,
               private route: ActivatedRoute,
@@ -33,19 +34,19 @@ export class PuzzlePlayer implements OnInit {
   }
 
   ngOnInit(): void {
-    this.subscription = this.route.paramMap.subscribe((params) => {
+    this.route.paramMap.subscribe((params) => {
 
-      const hash = params.get('hash');
-      const id = params.get('id');
+      this.puzzleHash = params.get('hash') ?? "";
+      this.madePuzzleId = Number.parseInt(params.get('id') ?? "-1");
 
-      if (hash)
+      if (this.puzzleHash.length > 0)
       {
-        this.puzzle = this.gameService.getRound(params.get('hash') ?? "");
+        this.puzzle = this.gameService.getRound(this.puzzleHash);
         this.isPlaytest = false;
       }
-      else if (id)
+      else if (this.madePuzzleId != -1)
       {
-        this.puzzle = new Puzzle(this.gameService.getMadePuzzleCopy(Number.parseInt(id)));
+        this.puzzle = new Puzzle(this.gameService.getMadePuzzleCopy(this.madePuzzleId));
         this.isPlaytest = true;
       }
     });
@@ -108,5 +109,17 @@ export class PuzzlePlayer implements OnInit {
   public get starRatingWidthStyle(): string
   {
     return `width: ${this.puzzle!.starScore * 2.0}rem`;
+  }
+
+  public navigateToMenu(): void
+  {
+    if (this.isPlaytest)
+    {
+      this.router.navigate(["/"], {fragment: `m-${this.madePuzzleId}`});
+    }
+    else
+    {
+      this.router.navigate(["/"], {fragment: `p-${this.puzzleHash}`});
+    }
   }
 }

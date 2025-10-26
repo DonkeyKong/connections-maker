@@ -1,4 +1,4 @@
-<mat-tab-group dynamicHeight>
+<mat-tab-group dynamicHeight [(selectedIndex)]="selectedTab">
   <mat-tab label="Play">
 
     @if (addDataMessage)
@@ -10,7 +10,7 @@
 
     @for(puzzle of puzzles; track $index)
     {
-      <div class="puzzle-list-box">
+      <div class="puzzle-list-box" id="p-{{puzzle.hash}}">
         <mat-icon class="status-indicator" [fontIcon]="getIndicatorIcon(puzzle)" />
         <div class="title">{{puzzle.title}}</div>
         <div class="subtitle">{{puzzle.subtitle}}</div>
@@ -68,7 +68,7 @@
 
     @for(puzzle of madePuzzles; track $index)
     {
-      <div class="puzzle-list-box" (click)="toggleSelect($index)">
+      <div class="puzzle-list-box" (click)="toggleSelect($index)" id="m-{{$index}}">
         <mat-icon class="status-indicator" fontIcon="menu" [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()"/>
         <mat-menu #menu="matMenu">
           <button mat-menu-item (click)="editPuzzle($index)"><mat-icon fontIcon="edit" />Edit</button>

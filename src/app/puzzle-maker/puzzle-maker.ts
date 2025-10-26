@@ -79,14 +79,14 @@ export class PuzzleMaker implements OnInit {
 
     if (this.validityStatus == PuzzleValidityResult.Valid)
     {
-      this.gameService.saveMadePuzzle(this.puzzle, this.puzzleId);
-      this.router.navigate(["/"]);
+      const saveId = this.gameService.saveMadePuzzle(this.puzzle, this.puzzleId);
+      this.router.navigate(["/"], {fragment: `m-${saveId}`});
     }
   }
 
   cancel(): void
   {
-    this.router.navigate(["/"]);
+    this.router.navigate(["/"], {fragment: `m-${this.puzzleId}`});
   }
 
   validateForm()

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon'; 
 import { MatTabsModule } from '@angular/material/tabs'
@@ -21,13 +21,14 @@ import { GameService } from '../../shared/game-service';
   templateUrl: './puzzle-list.html',
   styleUrl: './puzzle-list.scss'
 })
-export class PuzzleList implements OnInit {
+export class PuzzleList implements OnInit, AfterViewInit {
 
   public readonly PuzzleStatus = PuzzleStatus;
   public readonly MAXSTARS = MAXSTARS;
   public selected: Map<number, boolean>;
-  private subscription?: Subscription;
   public addDataMessage?: string;
+  public fragment: string = "p";
+  public selectedTab: number = 0;
 
   constructor(private gameService: GameService,
               private route: ActivatedRoute,
@@ -38,7 +39,7 @@ export class PuzzleList implements OnInit {
   }
 
   ngOnInit(): void {
-    this.subscription = this.route.paramMap.subscribe((params) => {
+    this.route.paramMap.subscribe((params) => {
 
       const data = params.get('gamedata');
 
@@ -66,6 +67,24 @@ export class PuzzleList implements OnInit {
         });
       }
     });
+
+    this.route.fragment.subscribe(fragment => {
+      this.fragment = fragment ?? "p";
+      if (this.fragment.startsWith('p'))
+      {
+        // Select play tab
+        this.selectedTab = 0;
+      }
+      else if (this.fragment.startsWith('m'))
+      {
+        // Select make tab
+        this.selectedTab = 1;
+      }
+    });
+  }
+
+  ngAfterViewInit(): void {
+    document?.querySelector('#' + this.fragment)?.scrollIntoView();
   }
 
   public get puzzles(): Puzzle[]
