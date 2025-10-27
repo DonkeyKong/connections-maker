@@ -2,6 +2,7 @@
 
 .puzzle-list-box {
   border-style: solid;
+  box-sizing: border-box;
   border-color: $word-box-border;
   border-width: 0.25rem;
   margin-top: 1rem;
@@ -66,6 +67,7 @@
 .message-box {
   display: flex;
   border-style: solid;
+  box-sizing: border-box;
   border-radius: 0.5rem;
   border-color: $word-box-border;
   margin-top: 1rem;

@@ -131,8 +131,26 @@
         <input matInput [(ngModel)]="puzzle.groups[3].items[3]" class="word-input" (ngModelChange)="validateForm()">
       </div>
     </div>
-
   </div>
+</div>
+
+<div class="starting-order-container">
+  <mat-checkbox [checked]="hasStartingOrder" (change)="hasStartingOrder = !hasStartingOrder">Set starting order</mat-checkbox>
+  @if (hasStartingOrder)
+  {
+    <div class="button-box">
+        <div cdkDropList cdkDropListOrientation="mixed" class="starting-order-list" (cdkDropListDropped)="drop($event)">
+        @for (i of startingConfig; track i) {
+          <div class="starting-order-word-box" [ngClass]="{
+            'group-box-yellow': getGroupIndexFromWordIndex(i) == 0,
+            'group-box-green':  getGroupIndexFromWordIndex(i) == 1,
+            'group-box-blue':  getGroupIndexFromWordIndex(i) == 2,
+            'group-box-purple':  getGroupIndexFromWordIndex(i) == 3,
+          }" cdkDrag>{{getWordFromWordIndex(i)}}</div>
+        }
+      </div>
+    </div>
+  }
 </div>
 
 <div class="puzzle-validity-status">
@@ -165,27 +183,6 @@
     <mat-icon class="bad" fontIcon="warning" /><div class="message bad">Each group must have {{GROUPSIZE}} words.</div>
   }
 </div>
-
-<div class="button-box">
-  <mat-checkbox [checked]="hasStartingOrder" (change)="hasStartingOrder = !hasStartingOrder">Specify starting positions</mat-checkbox>
-</div>
-
-@if (hasStartingOrder)
-{
-  <div class="button-box">
-      <div cdkDropList cdkDropListOrientation="mixed" class="starting-order-list" (cdkDropListDropped)="drop($event)">
-      @for (i of startingConfig; track i) {
-        <div class="starting-order-word-box" [ngClass]="{
-          'group-box-yellow': getGroupIndexFromWordIndex(i) == 0,
-          'group-box-green':  getGroupIndexFromWordIndex(i) == 1,
-          'group-box-blue':  getGroupIndexFromWordIndex(i) == 2,
-          'group-box-purple':  getGroupIndexFromWordIndex(i) == 3,
-        }" cdkDrag>{{getWordFromWordIndex(i)}}</div>
-      }
-    </div>
-  </div>
-
-}
 
 <div class="button-box">
   <button matButton="outlined" (click)="cancel()">Cancel</button>

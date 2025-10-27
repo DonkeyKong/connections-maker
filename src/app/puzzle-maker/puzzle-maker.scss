@@ -33,9 +33,10 @@
 }
 
 .group-box {
-  width: $screen-width - 0.5rem;
+  width: $screen-width;
   border-radius: 0.5rem;
   border-style: outset;
+  box-sizing: border-box;
   border-color: black;
   border-width: 0.25rem;
   background-color: $word-box-bg;
@@ -82,11 +83,23 @@
   height: 3.0rem;
   border-radius: 0.5rem;
   border-style: outset;
+  box-sizing: border-box;
   border-color: $word-box-border;
   border-width: 0.25rem;
   background-color: $word-box-bg;
   display: flex;
   align-items: center;
+  justify-content: center;
+}
+
+.starting-order-container {
+  width: $screen-width;
+  margin-top: 1.0rem;
+  margin-bottom: 1.0rem;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
 }
 
@@ -100,6 +113,7 @@
   flex-wrap: wrap;
   width: $screen-width;
   overflow: hidden;
+  margin-bottom: 0.5rem;
 }
 
 .starting-order-word-box {
@@ -117,13 +131,16 @@
   cursor: move;
 }
 
-
 .puzzle-validity-status {
   display: flex;
   border-style: solid;
   border-radius: 0.5rem;
   border-color: $word-box-border;
-  margin-top: 1rem;
+  box-sizing: border-box;
+  // margin-top: 1rem;
+  width: $screen-width;
+  margin-right: auto;
+  margin-left: auto;
   align-items: center;
   gap: 1.0rem;
   padding: 0.5rem;
@@ -151,5 +168,5 @@
 }
 
 .cdk-drag-animating {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  // transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }

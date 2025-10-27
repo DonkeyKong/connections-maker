@@ -32,6 +32,7 @@
   min-height: 3.0rem;
   border-radius: 0.5rem;
   border-style: outset;
+  box-sizing: border-box;
   border-color: black;
   border-width: 0.25rem;
   background-color: $word-box-bg;
@@ -90,10 +91,11 @@
 }
 
 .word-box {
-  width: 5.25rem;
+  width: 5.75rem;
   height: 3.0rem;
   border-radius: 0.5rem;
   border-style: outset;
+  box-sizing: border-box;
   border-color: $word-box-border;
   border-width: 0.25rem;
   background-color: $word-box-bg;
@@ -179,6 +181,7 @@
   margin-top: 1.0rem;
   display: flex;
   border-style: solid;
+  box-sizing: border-box;
   border-width: 0.1rem;
   border-color: $word-box-border;
   border-radius: 0.5rem;
@@ -218,6 +221,7 @@
   .box {
     display: flex;
     border-style: solid;
+    box-sizing: border-box;
     border-width: 0.1rem;
     border-color: $word-box-border;
     border-radius: 0.5rem;
