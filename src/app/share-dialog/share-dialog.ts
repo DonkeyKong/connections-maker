@@ -46,10 +46,6 @@ export class ShareDialog implements AfterViewInit {
       {
         qrToCanvas(this.canvas.nativeElement, this.shareLink, { width: 480 });
       }
-
-      // GzipBase64Compressor.decompressObject<PuzzleStorage[]>(compressedValue).then((decompressedValue) => {
-      //   this.round = new Puzzle(decompressedValue[0]);
-      // });
     });
   }
 }

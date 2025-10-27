@@ -167,6 +167,27 @@
 </div>
 
 <div class="button-box">
+  <mat-checkbox [checked]="hasStartingOrder" (change)="hasStartingOrder = !hasStartingOrder">Specify starting positions</mat-checkbox>
+</div>
+
+@if (hasStartingOrder)
+{
+  <div class="button-box">
+      <div cdkDropList cdkDropListOrientation="mixed" class="starting-order-list" (cdkDropListDropped)="drop($event)">
+      @for (i of startingConfig; track i) {
+        <div class="starting-order-word-box" [ngClass]="{
+          'group-box-yellow': getGroupIndexFromWordIndex(i) == 0,
+          'group-box-green':  getGroupIndexFromWordIndex(i) == 1,
+          'group-box-blue':  getGroupIndexFromWordIndex(i) == 2,
+          'group-box-purple':  getGroupIndexFromWordIndex(i) == 3,
+        }" cdkDrag>{{getWordFromWordIndex(i)}}</div>
+      }
+    </div>
+  </div>
+
+}
+
+<div class="button-box">
   <button matButton="outlined" (click)="cancel()">Cancel</button>
   <button matButton="outlined" (click)="saveAndExit()">Save and Exit</button>
 </div>

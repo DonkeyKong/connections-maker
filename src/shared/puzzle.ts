@@ -118,6 +118,7 @@ export interface PuzzleStorage
   title: string;
   subtitle: string;
   groups: GroupStorage[];
+  startingConfig?: number[];
 }
 
 export class Word
@@ -222,6 +223,7 @@ export class Puzzle
   {
     this.title = PuzzleStorage.title;
     this.subtitle = PuzzleStorage.subtitle;
+    this.startingConfig = PuzzleStorage.startingConfig;
 
     var groups: Group[] = [];
     for (var i=0; i < PuzzleStorage.groups.length; ++i)
