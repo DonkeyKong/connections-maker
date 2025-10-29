@@ -8,6 +8,7 @@
 
 .puzzle-info-container {
   margin-bottom: 1.0rem;
+  margin-top: 1.0rem;
 }
 
 .puzzle-title {
@@ -28,15 +29,22 @@
 }
 
 .group-box {
+  display: flex;
   width: $screen-width;
-  min-height: 3.0rem;
+  min-height: 4.0rem;
   border-radius: 0.5rem;
   border-style: outset;
   box-sizing: border-box;
   border-color: black;
   border-width: 0.25rem;
   background-color: $word-box-bg;
-  overflow: hidden;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  align-content: center;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1.0rem;
+  padding-right: 1.0rem;
 
   /* Animation */
   animation: show 600ms 100ms cubic-bezier(0.38, 0.97, 0.56, 0.76) forwards;
@@ -55,13 +63,13 @@
 .group-title {
   font-weight: 200;
   font-size: 1.2rem;
-  margin-left: 1.0rem;
-  margin-top: 0.25rem;
+  width: 100%;
+  flex-shrink: 0;
 }
 
 .group-items {
-  width: 23rem;
-  margin-left: 1.0rem;
+  width: 100%;
+  flex-shrink: 0;
 }
 
 .group-box-yellow {
@@ -92,7 +100,7 @@
 
 .word-box {
   width: 5.75rem;
-  height: 3.0rem;
+  height: 4.0rem;
   border-radius: 0.5rem;
   border-style: outset;
   box-sizing: border-box;

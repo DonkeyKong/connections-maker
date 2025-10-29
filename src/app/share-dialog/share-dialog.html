@@ -2,7 +2,27 @@
 <div class="dialog-container">
   <h2>Connections Maker Custom Game</h2>
 
-  <canvas #qrCodeCanvas class="qrCodeCanvas"></canvas>
+  @if (generatingQrCode)
+  {
+    <div class="status-message">
+      Generating QR Code...
+    </div>
+  }
+
+  @if (failedToGenerateQrCode)
+  {
+    <div class="status-message">
+      Failed to generate QR code. Try sharing fewer puzzles at once.
+    </div>
+    <div class="status-message">
+      The link below may be too long for some messaging apps or browsers.
+    </div>
+  }
+
+  @if (!failedToGenerateQrCode)
+  {
+    <canvas #qrCodeCanvas class="qrCodeCanvas"></canvas>
+  }
 
   <div class="button-box">
     <button mat-button [cdkCopyToClipboard]="shareLink">Copy Share Link</button>

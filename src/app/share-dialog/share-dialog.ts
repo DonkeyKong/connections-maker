@@ -28,6 +28,9 @@ export class ShareDialog implements AfterViewInit {
   canvas: ElementRef<HTMLCanvasElement> | null = null;
   context: CanvasRenderingContext2D | null | undefined = null;
 
+  generatingQrCode: boolean = true;
+  failedToGenerateQrCode: boolean = false;
+
   public shareLink: string;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: ShareDialogData)
@@ -44,7 +47,12 @@ export class ShareDialog implements AfterViewInit {
 
       if (this.canvas)
       {
-        qrToCanvas(this.canvas.nativeElement, this.shareLink, { width: 480 });
+        qrToCanvas(this.canvas.nativeElement, this.shareLink).then(()=>{
+          this.generatingQrCode = false;
+        },(_)=>{
+          this.generatingQrCode = false;
+          this.failedToGenerateQrCode = true;
+        });
       }
     });
   }
