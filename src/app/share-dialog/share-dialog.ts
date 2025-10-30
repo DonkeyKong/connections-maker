@@ -49,6 +49,7 @@ export class ShareDialog implements AfterViewInit {
       {
         qrToCanvas(this.canvas.nativeElement, this.shareLink).then(()=>{
           this.generatingQrCode = false;
+          this.canvas!.nativeElement.style = "";
         },(_)=>{
           this.generatingQrCode = false;
           this.failedToGenerateQrCode = true;
