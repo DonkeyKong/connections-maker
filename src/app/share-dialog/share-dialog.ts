@@ -4,9 +4,9 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { PuzzleStorage } from '../../shared/puzzle';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { base64ToBase64Url } from '../../shared/base64url';
+import { base64ToBase64Url } from '../../shared/base64Util';
 import { GzipBase64Compressor } from '../../shared/gzip-base64-compressor';
-import { toCanvas as qrToCanvas, QRCodeRenderersOptions } from 'qrcode'
+import { toCanvas as qrToCanvas } from 'qrcode'
 
 
 

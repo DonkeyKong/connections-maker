@@ -1,3 +1,4 @@
+import { base64ToString, stringToBase64 } from "./base64Util";
 import { PuzzleStorage, Puzzle, Guess } from "./puzzle"
 
 export interface RoundSaveData
@@ -34,7 +35,7 @@ export class GameService
     const puzzlesBase64 = localStorage.getItem("Puzzles");
     if (puzzlesBase64)
     {
-      const parsedRoundStorage = JSON.parse(atob(puzzlesBase64));
+      const parsedRoundStorage = JSON.parse(base64ToString(puzzlesBase64));
       if (Array.isArray(parsedRoundStorage))
       {
         this._puzzleStorage = parsedRoundStorage as PuzzleStorage[];
@@ -71,17 +72,17 @@ export class GameService
     localStorage.setItem(round.hash, JSON.stringify(saveData));
   }
 
-  public addRound(storage: PuzzleStorage): boolean
+  public addRound(storage: PuzzleStorage): Puzzle | undefined
   {
     const round = this.initRoundFromStorage(storage);
     if (this._puzzles.has(round.hash))
     {
-      return false;
+      return undefined;
     }
     this._puzzleStorage.push(storage);
     this._puzzles.set(round.hash, round);
-    localStorage.setItem("Puzzles", btoa(JSON.stringify(this._puzzleStorage)));
-    return true;
+    localStorage.setItem("Puzzles", stringToBase64(JSON.stringify(this._puzzleStorage)));
+    return round;
   }
 
   public get puzzles() : Puzzle[]

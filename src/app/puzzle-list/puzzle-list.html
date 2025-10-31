@@ -10,7 +10,7 @@
 
     @for(puzzle of puzzles; track $index)
     {
-      <div class="puzzle-list-box" id="p-{{puzzle.hash}}">
+      <div [ngClass]="{'new-puzzle-box' : addedPuzzleHashes.includes(puzzle.hash)}" class="puzzle-list-box" id="p-{{puzzle.hash}}">
         <mat-icon class="status-indicator" [fontIcon]="getIndicatorIcon(puzzle)" />
         <div class="title">{{puzzle.title}}</div>
         <div class="subtitle">{{puzzle.subtitle}}</div>

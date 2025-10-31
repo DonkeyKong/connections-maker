@@ -1,5 +1,5 @@
 import { Md5 } from "ts-md5"
-import { base64ToBase64Url } from "./base64url";
+import { base64ToBase64Url } from "./base64Util";
 
 export const GROUPSIZE: number = 4;
 export const NUMGROUPS: number = 4;

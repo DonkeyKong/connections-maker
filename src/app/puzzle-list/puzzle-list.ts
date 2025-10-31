@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon'; 
 import { MatTabsModule } from '@angular/material/tabs'
@@ -12,12 +13,12 @@ import { ImportDialog } from '../import-dialog/import-dialog';
 import { ShareDialog } from '../share-dialog/share-dialog';
 import { Puzzle, PuzzleStatus, PuzzleStorage, MAXSTARS } from '../../shared/puzzle';
 import { GzipBase64Compressor } from '../../shared/gzip-base64-compressor';
-import { base64UrlToBase64 } from '../../shared/base64url';
+import { base64UrlToBase64 } from '../../shared/base64Util';
 import { GameService } from '../../shared/game-service';
 
 @Component({
   selector: 'app-puzzle-list',
-  imports: [MatButtonModule, MatIconModule, MatTabsModule, MatMenuModule, MatDividerModule],
+  imports: [MatButtonModule, MatIconModule, MatTabsModule, MatMenuModule, MatDividerModule, CommonModule],
   templateUrl: './puzzle-list.html',
   styleUrl: './puzzle-list.scss'
 })
@@ -29,6 +30,7 @@ export class PuzzleList implements OnInit, AfterViewInit {
   public addDataMessage?: string;
   public fragment: string = "p";
   public selectedTab: number = 0;
+  public addedPuzzleHashes: string[] = [];
 
   constructor(private gameService: GameService,
               private route: ActivatedRoute,
@@ -42,7 +44,8 @@ export class PuzzleList implements OnInit, AfterViewInit {
     this.route.paramMap.subscribe((params) => {
 
       const data = params.get('gamedata');
-
+      this.addedPuzzleHashes = [];
+      this.addDataMessage = undefined;
       if (data)
       {
         GzipBase64Compressor.decompressObject<PuzzleStorage[]>(base64UrlToBase64(data)).then((puzzles) => {
@@ -50,9 +53,11 @@ export class PuzzleList implements OnInit, AfterViewInit {
           let i=0;
           for (const puzzle of puzzles)
           {
-            if (this.gameService.addRound(puzzle))
+            const addedRound = this.gameService.addRound(puzzle);
+            if (addedRound)
             {
               i += 1;
+              this.addedPuzzleHashes.push(addedRound.hash)
             }
           }
 
