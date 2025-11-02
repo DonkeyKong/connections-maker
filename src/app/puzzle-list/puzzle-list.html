@@ -13,8 +13,8 @@
       {
         <button matButton="outlined" [matMenuTriggerFor]="editmenu">Select...</button>
         <mat-menu #editmenu="matMenu">
-          <button mat-menu-item (click)="selectPlayCompleted()"><mat-icon fontIcon="select_all" />Select Completed</button>
           <button mat-menu-item (click)="selectPlayAll()"><mat-icon fontIcon="select_all" />Select All</button>
+          <button mat-menu-item (click)="selectPlayCompleted()"><mat-icon fontIcon="check_box_outline" />Select Finished</button>
           <button mat-menu-item (click)="deselectPlayAll()" [disabled]="playSelected.size == 0"><mat-icon fontIcon="deselect" />Select None</button>
         </mat-menu>
 
