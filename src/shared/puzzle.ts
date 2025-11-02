@@ -218,17 +218,18 @@ export class Puzzle
   public points: number = 0;
   public bonusMultiplier: number = MAXBONUS;
   private loaded: boolean = false;
+  private cacheHash: string = "";
 
-  constructor(PuzzleStorage: PuzzleStorage)
+  constructor(public puzzleStorage: PuzzleStorage)
   {
-    this.title = PuzzleStorage.title;
-    this.subtitle = PuzzleStorage.subtitle;
-    this.startingConfig = PuzzleStorage.startingConfig;
+    this.title = puzzleStorage.title;
+    this.subtitle = puzzleStorage.subtitle;
+    this.startingConfig = puzzleStorage.startingConfig;
 
     var groups: Group[] = [];
-    for (var i=0; i < PuzzleStorage.groups.length; ++i)
+    for (var i=0; i < puzzleStorage.groups.length; ++i)
     {
-      groups.push(new Group(PuzzleStorage.groups[i], i));
+      groups.push(new Group(puzzleStorage.groups[i], i));
     }
     this.groups = groups;
 
@@ -422,6 +423,11 @@ export class Puzzle
   // Get an 16 character alphanumeric hash unique to this puzzle
   public get hash(): string
   {
+    if (this.cacheHash != "")
+    {
+      return this.cacheHash;
+    }
+
     const int32array = Md5.hashStr(this.groups.map((g)=>g.itemsString).join("; "), true);
     const view = new DataView(int32array.buffer);
     const uni8array = new Uint8Array(int32array.length * 4);
@@ -433,7 +439,8 @@ export class Puzzle
         uni8array[i*4+3] = view.getUint8(i*4+3);
     }
 
-    return base64ToBase64Url(uni8array.subarray(0, 12).toBase64());
+    this.cacheHash = base64ToBase64Url(uni8array.subarray(0, 12).toBase64());
+    return this.cacheHash;
   }
 
   public get starScore(): number

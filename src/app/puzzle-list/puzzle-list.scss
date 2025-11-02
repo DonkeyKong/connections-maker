@@ -15,6 +15,7 @@
   .title {
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
+    font-weight: 150;
   }
 
   .subtitle {
@@ -39,6 +40,12 @@
     width: 2.0rem;
     height: 100%;
   }
+}
+
+.puzzle-list-divider {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  margin-left: 0.5rem;
 }
 
 .new-puzzle-box {
@@ -78,6 +85,7 @@
   align-items: center;
   gap: 1.0rem;
   padding: 0.5rem;
+  clear: both;
 
   .good {
     color: lightgreen;
@@ -86,4 +94,19 @@
   .bad {
     color: goldenrod;
   }
+}
+
+.button-box-float {
+  float: right;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: right;
+  margin-top: 0.25rem;
+  margin-right: 0.5rem;
+}
+
+.icon-button-on {
+  background-color: var(--mat-sys-primary);
+  color: var(--mat-sys-on-primary);
 }

@@ -8,14 +8,88 @@
       </div>
     }
 
-    @for(puzzle of puzzles; track $index)
+    <div class="button-box-float">
+      @if (playEditing)
+      {
+        <button matButton="outlined" [matMenuTriggerFor]="editmenu">Select...</button>
+        <mat-menu #editmenu="matMenu">
+          <button mat-menu-item (click)="selectPlayCompleted()"><mat-icon fontIcon="select_all" />Select Completed</button>
+          <button mat-menu-item (click)="selectPlayAll()"><mat-icon fontIcon="select_all" />Select All</button>
+          <button mat-menu-item (click)="deselectPlayAll()" [disabled]="playSelected.size == 0"><mat-icon fontIcon="deselect" />Select None</button>
+        </mat-menu>
+
+        <button matButton="outlined" (click)="removeSelectedPlayPuzzles()" [disabled]="playSelected.size == 0">
+          <mat-icon fontIcon="delete" />Remove
+        </button>
+      }
+
+      <button matIconButton (click)="toggleEditPlay()" [ngClass]="{'icon-button-on': playEditing }" [disabled]="(puzzles.length == 0)"><mat-icon fontIcon="edit" /></button>
+    </div>
+
+    @if (nonCompletedPuzzles.length > 0)
     {
-      <div [ngClass]="{'new-puzzle-box' : addedPuzzleHashes.includes(puzzle.hash)}" class="puzzle-list-box" id="p-{{puzzle.hash}}">
+      <div class="puzzle-list-divider">Playable</div>
+    }
+
+    @for(puzzle of nonCompletedPuzzles; track $index)
+    {
+      <div [ngClass]="{'new-puzzle-box' : addedPuzzleHashes.includes(puzzle.hash)}" class="puzzle-list-box" id="p-{{puzzle.hash}}" (click)="togglePlaySelect(puzzle.hash)">
         <mat-icon class="status-indicator" [fontIcon]="getIndicatorIcon(puzzle)" />
+
+        @if (playEditing)
+        {
+          <div class="select-indicator">
+            @if (playSelected.has(puzzle.hash))
+            {
+              <mat-icon fontIcon="check_box_outline" />
+            }
+            @else
+            {
+              <mat-icon fontIcon="check_box_outline_blank" />
+            }
+          </div>
+        }
+
         <div class="title">{{puzzle.title}}</div>
         <div class="subtitle">{{puzzle.subtitle}}</div>
+
+        @if (!playEditing)
+        {
+          <div class="button-container">
+              <button matButton="outlined" (click)="playPuzzle(puzzle)">{{getPlayString(puzzle)}}</button>
+          </div>
+        }
+      </div>
+    }
+
+    @if (completedPuzzles.length > 0)
+    {
+      <div class="puzzle-list-divider">Finished</div>
+    }
+    
+    @for(puzzle of completedPuzzles; track $index)
+    {
+      <div class="puzzle-list-box" id="p-{{puzzle.hash}}" (click)="togglePlaySelect(puzzle.hash)">
+        <mat-icon class="status-indicator" [fontIcon]="getIndicatorIcon(puzzle)" />
         
-        @if (puzzle.status == PuzzleStatus.Complete)
+        @if (playEditing)
+        {
+          <div class="select-indicator">
+            @if (playSelected.has(puzzle.hash))
+            {
+              <mat-icon fontIcon="check_box_outline" />
+            }
+            @else
+            {
+              <mat-icon fontIcon="check_box_outline_blank" />
+            }
+          </div>
+        }
+        
+        <div class="title">{{puzzle.title}}</div>
+        <div class="subtitle">{{puzzle.subtitle}}</div>
+
+        @if (!playEditing)
         {
           @if (puzzle.starScore > 0)
           {
@@ -31,12 +105,14 @@
           {
             <div class="score">No Stars</div>
           }
+          <div class="button-container">
+              <button matButton="outlined" (click)="playPuzzle(puzzle)">{{getPlayString(puzzle)}}</button>
+          </div>
         }
-        <div class="button-container">
-            <button matButton="outlined" (click)="playPuzzle(puzzle)">{{getPlayString(puzzle)}}</button>
-        </div>
       </div>
     }
+
+
     @if (puzzles.length == 0)
     {
       <div class="no-list-items">
@@ -83,7 +159,7 @@
           <button mat-menu-item (click)="editPuzzle($index)"><mat-icon fontIcon="edit" />Edit</button>
           <button mat-menu-item (click)="playtest($index)"><mat-icon fontIcon="play_circle" />Playtest</button>
           <mat-divider></mat-divider>
-          <button mat-menu-item (click)="deletePuzzle($index)" class="bad"><mat-icon fontIcon="delete" />Delete</button>
+          <button mat-menu-item (click)="deleteMadePuzzle($index)" class="bad"><mat-icon fontIcon="delete" />Delete</button>
         </mat-menu>
 
         <div class="select-indicator">
@@ -95,7 +171,6 @@
           {
             <mat-icon fontIcon="check_box_outline_blank" />
           }
-          
         </div>
 
         <div class="title">{{puzzle.title}}</div>

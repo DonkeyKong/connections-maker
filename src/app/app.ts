@@ -8,7 +8,9 @@ const gameService: GameService = new GameService();
 @Component({
   selector: 'app-root',
   imports: [ RouterOutlet ],
-  providers: [{ provide: GameService, useValue: gameService }],
+  providers: [
+    { provide: GameService, useValue: gameService }
+  ],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

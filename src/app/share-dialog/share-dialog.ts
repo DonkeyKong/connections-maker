@@ -1,14 +1,13 @@
 import { Component, Inject, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { MatButtonModule } from '@angular/material/button';
+import { PlatformLocation } from "@angular/common";
 
 import { PuzzleStorage } from '../../shared/puzzle';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { base64ToBase64Url } from '../../shared/base64Util';
 import { GzipBase64Compressor } from '../../shared/gzip-base64-compressor';
 import { toCanvas as qrToCanvas } from 'qrcode'
-
-
 
 export interface ShareDialogData {
   puzzles: PuzzleStorage[]
@@ -33,9 +32,15 @@ export class ShareDialog implements AfterViewInit {
 
   public shareLink: string;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: ShareDialogData)
+  constructor(@Inject(MAT_DIALOG_DATA) public data: ShareDialogData, platformLocation: PlatformLocation)
   {
-    this.shareLink = "http://bubbulon.com/cm/";
+    let host = platformLocation.hostname;
+    if (platformLocation.port)
+    {
+      host += `:${platformLocation.port}`
+    }
+    
+    this.shareLink = `${platformLocation.protocol}//${host}${platformLocation.getBaseHrefFromDOM()}add/`;
   }
 
   ngAfterViewInit(): void {
@@ -43,7 +48,7 @@ export class ShareDialog implements AfterViewInit {
 
     GzipBase64Compressor.compressObject(this.data.puzzles).then((compressedValue) => {
     
-      this.shareLink = `http://bubbulon.com/cm/add/${base64ToBase64Url(compressedValue)}`;
+      this.shareLink += base64ToBase64Url(compressedValue);
 
       if (this.canvas)
       {

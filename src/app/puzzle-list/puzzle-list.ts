@@ -32,12 +32,16 @@ export class PuzzleList implements OnInit, AfterViewInit {
   public selectedTab: number = 0;
   public addedPuzzleHashes: string[] = [];
 
+  public playEditing: boolean = false;
+  public playSelected: Set<string>;
+
   constructor(private gameService: GameService,
               private route: ActivatedRoute,
               private router: Router,
               private dialog: MatDialog)
   {
     this.selected = new Map<number, boolean>();
+    this.playSelected = new Set<string>;
   }
 
   ngOnInit(): void {
@@ -97,6 +101,16 @@ export class PuzzleList implements OnInit, AfterViewInit {
     return this.gameService.puzzles;
   }
 
+  public get nonCompletedPuzzles(): Puzzle[]
+  {
+    return this.gameService.puzzles.filter((p)=>(p.status != PuzzleStatus.Complete));
+  }
+
+  public get completedPuzzles(): Puzzle[]
+  {
+    return this.gameService.puzzles.filter((p)=>(p.status == PuzzleStatus.Complete));
+  }
+
   public get madePuzzles(): PuzzleStorage[]
   {
     return this.gameService.madePuzzles;
@@ -117,9 +131,9 @@ export class PuzzleList implements OnInit, AfterViewInit {
     this.router.navigate([`/make/${puzzleId}`]);
   }
 
-  public deletePuzzle(puzzleId: number)
+  public deleteMadePuzzle(puzzleId: number)
   {
-    this.gameService.deletePuzzle(puzzleId);
+    this.gameService.deleteMadePuzzle(puzzleId);
 
     // Adjust the selected map
     const selected = new Map<number, boolean>();
@@ -229,7 +243,7 @@ export class PuzzleList implements OnInit, AfterViewInit {
     puzzlesToDelete.sort((a,b)=>b-a);
     for (const i of puzzlesToDelete)
     {
-      this.gameService.deletePuzzle(i);
+      this.gameService.deleteMadePuzzle(i);
     }
 
     // Clear all selected
@@ -239,5 +253,53 @@ export class PuzzleList implements OnInit, AfterViewInit {
   public showImportDialog(): void
   {
     this.dialog.open(ImportDialog, {data: this.gameService });
+  }
+
+  public toggleEditPlay(): void
+  {
+    this.playEditing = !this.playEditing;
+  }
+
+  public togglePlaySelect(puzzleHash: string): void
+  {
+    if (this.playEditing)
+    {
+      if (this.playSelected.has(puzzleHash))
+      {
+        this.playSelected.delete(puzzleHash);
+      }
+      else
+      {
+        this.playSelected.add(puzzleHash);
+      }
+    }
+  }
+
+  public removeSelectedPlayPuzzles(): void
+  {
+    this.gameService.removePlayPuzzles(this.playSelected);
+    this.playSelected.clear();
+    this.playEditing = false;
+  }
+
+  public selectPlayCompleted(): void
+  {
+    for (const puzzle of this.completedPuzzles)
+    {
+      this.playSelected.add(puzzle.hash);
+    }
+  }
+  
+  public selectPlayAll(): void
+  {
+    for (const puzzle of this.puzzles)
+    {
+      this.playSelected.add(puzzle.hash);
+    }
+  }
+
+  public deselectPlayAll(): void
+  {
+    this.playSelected.clear();
   }
 }

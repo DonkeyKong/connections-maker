@@ -106,10 +106,29 @@ export class GameService
     return JSON.parse(JSON.stringify(this._madePuzzleStorage[id]));
   }
 
-  public deletePuzzle(puzzleId: number): void
+  public deleteMadePuzzle(puzzleId: number): void
   {
     this._madePuzzleStorage.splice(puzzleId, 1);
     localStorage.setItem("MadePuzzles", JSON.stringify(this._madePuzzleStorage));
+  }
+
+  public removePlayPuzzles(hashSet: Set<string>)
+  {
+    for (const puzzleHash of hashSet)
+    {
+      const puzzle = this._puzzles.get(puzzleHash);
+      if (puzzle)
+      {
+        const storateInd = this._puzzleStorage.indexOf(puzzle.puzzleStorage);
+        this._puzzles.delete(puzzleHash);
+        if (storateInd != -1)
+        {
+          this._puzzleStorage.splice(storateInd, 1);
+        }
+      }
+    }
+    
+    localStorage.setItem("Puzzles", stringToBase64(JSON.stringify(this._puzzleStorage)));
   }
 
   public saveMadePuzzle(puzzleStorage: PuzzleStorage, puzzleId: number): number
@@ -129,25 +148,23 @@ export class GameService
 
   public importMadePuzzles(puzzleJson: string, mergeStrategy: MergeStrategy = MergeStrategy.Duplicate)
   {
-    //puzzleFile.text().then((puzzleJson: string)=>{
-      const importedPuzzles = JSON.parse(puzzleJson) as PuzzleStorage[];
+    const importedPuzzles = JSON.parse(puzzleJson) as PuzzleStorage[];
 
-      for (const importedPuzzle of importedPuzzles)
+    for (const importedPuzzle of importedPuzzles)
+    {
+      let existingPuzzleIndex = this.madePuzzles.findIndex((p)=>(p.title == importedPuzzle.title));
+      if (mergeStrategy == MergeStrategy.Skip && existingPuzzleIndex != -1)
       {
-        let existingPuzzleIndex = this.madePuzzles.findIndex((p)=>(p.title == importedPuzzle.title));
-        if (mergeStrategy == MergeStrategy.Skip && existingPuzzleIndex != -1)
-        {
-          continue;
-        }
-        else if (mergeStrategy == MergeStrategy.Replace)
-        {
-          this.saveMadePuzzle(importedPuzzle, existingPuzzleIndex);
-        }
-        else 
-        {
-          this.saveMadePuzzle(importedPuzzle, -1);
-        }
+        continue;
       }
-    //});
+      else if (mergeStrategy == MergeStrategy.Replace)
+      {
+        this.saveMadePuzzle(importedPuzzle, existingPuzzleIndex);
+      }
+      else 
+      {
+        this.saveMadePuzzle(importedPuzzle, -1);
+      }
+    }
   }
 }
